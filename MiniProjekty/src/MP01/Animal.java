@@ -14,7 +14,7 @@ public class Animal implements Serializable {
     private Double weight;  //Atr. opcjonalny
     private List<Owner> owners = new ArrayList<Owner>(); //Atr. powt. //Atr. złożony
     private int age;//Atr. pochodny
-    private static int minSeniorAge = 10; //Atr. klasowy
+    private static double minSeniorAge; //Atr. klasowy
     private boolean isSenior;
 
     public Animal(String name) {
@@ -26,11 +26,13 @@ public class Animal implements Serializable {
     public Animal(String name, String birthDate) {
         this.name = name;
         this.birthDate = LocalDate.parse(birthDate);
+        this.age = getAge();
         addAnimal(this);
     }
     public Animal(String name, String birthDate, double weight) {
         this.name = name;
         this.birthDate = LocalDate.parse(birthDate);
+        this.age = getAge();
         this.weight = weight;
         addAnimal(this);
     }
@@ -38,6 +40,7 @@ public class Animal implements Serializable {
     public Animal(String name, double weight) {
         this.name = name;
         birthDate = LocalDate.now();
+        this.age = getAge();
         this.weight = weight;
         addAnimal(this);
     }
@@ -82,6 +85,10 @@ public class Animal implements Serializable {
         this.weight = weight;
     }
 
+    public static void setMinSeniorAge(double minAge){
+        minSeniorAge = minAge;
+    }
+
     public static void showAnimals() {//Met. klasowa
         System.out.println("All animals: ");
         for(Animal animal : allAnimals) {
@@ -102,8 +109,12 @@ public class Animal implements Serializable {
     @Override
     public String toString() { //Przesłonięcie
         StringBuilder ownersString = new StringBuilder();
-        for(Owner owner : owners) {
-            ownersString.append(owner.toString());
+        if(owners.size() > 0){
+            for(int i = 0; i < owners.size() - 1; i++) {
+                ownersString.append(owners.get(i));
+                ownersString.append(", ");
+            }
+            ownersString.append(owners.get(owners.size()-1));
         }
         return name + " { age: " + getAge() + ", weight: " + (getWeight() == null ? "unknown" : weight)
                 + ", senior: " + (getIsSenior() ? "yes" : "no" )+ ", owners: " + ownersString + " }";
