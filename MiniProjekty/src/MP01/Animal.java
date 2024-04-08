@@ -63,8 +63,8 @@ public class Animal implements Serializable {
     }
 
     public int getAge(){
-        Period age = Period.between(birthDate, LocalDate.now());
-        return age.getYears();
+        int age = (int) ChronoUnit.YEARS.between(birthDate, LocalDate.now());
+        return age;
     }
 
     public int getAge(String param){ //Przeciążenie
