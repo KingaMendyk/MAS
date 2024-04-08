@@ -54,8 +54,16 @@ public class Animal implements Serializable {
         allAnimals.add(animal);
     }
 
+    public void addOwner(Owner owner) {
+        owners.add(owner);
+    }
+
     public String getName() {
         return name;
+    }
+
+    public List<Owner> getOwners() {
+        return owners;
     }
 
     public void setBirthDate(String date) {
@@ -64,14 +72,6 @@ public class Animal implements Serializable {
 
     public void setWeight(double value) {
         weight = value;
-    }
-
-    public void addOwner(Owner owner) {
-        owners.add(owner);
-    }
-
-    public List<Owner> getOwners() {
-        return owners;
     }
 
     public static void showAnimals() {//Met. klasowa
@@ -102,11 +102,11 @@ public class Animal implements Serializable {
     }
 
     //Ekst. - trwałość
-    public static void serializeAll(ObjectOutputStream stream) throws IOException {
+    private static void serializeAll(ObjectOutputStream stream) throws IOException {
         stream.writeObject(allAnimals);
     }
 
-    public static void deserializeAll(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+    private static void deserializeAll(ObjectInputStream stream) throws IOException, ClassNotFoundException {
         allAnimals = (ArrayList<Animal>) stream.readObject();
     }
 
