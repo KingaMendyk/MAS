@@ -4,18 +4,17 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class Animal implements Serializable {
-    private static List<Animal> allAnimals = new ArrayList<Animal>(); //Ekstensja
+    private static List<Animal> allAnimals = new ArrayList<>(); //Ekstensja
 
     private String name;
     private LocalDate birthDate; //Atr. złożony
     private Double weight;  //Atr. opcjonalny
-    private List<Owner> owners = new ArrayList<Owner>(); //Atr. powt. //Atr. złożony
-    private int age;//Atr. pochodny
+    private List<Owner> owners = new ArrayList<>(); //Atr. powt. //Atr. złożony
+    private int age; //Atr. pochodny
     private static double minSeniorAge; //Atr. klasowy
-    private boolean isSenior;
+    private boolean isSenior; //Atr. pochodny
 
     public Animal(String name) {
         this.name = name;
@@ -97,7 +96,7 @@ public class Animal implements Serializable {
     }
 
     public static List<Animal> getSeniorAnimals() { //Met. klasowa
-        List<Animal> seniors = new ArrayList<Animal>();
+        List<Animal> seniors = new ArrayList<>();
         for(Animal animal : allAnimals) {
             if (animal.getIsSenior()) {
                 seniors.add(animal);
