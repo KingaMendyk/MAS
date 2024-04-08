@@ -3,9 +3,9 @@ package MP01;
 public class Main {
     public static void main(String[] args) {
         Animal animal1 = new Animal("Miauczur");
-        Animal animal2 = new Animal("Burek", "06-02-2010");
-        Animal animal3 = new Animal("Tofi", "10-12-2016", 15);
-        Animal animal4 = new Animal("Mruczek", "07-08-2020", 10);
+        Animal animal2 = new Animal("Burek");
+        Animal animal3 = new Animal("Tofi", 15);
+        Animal animal4 = new Animal("Mruczek", 10);
 
         System.out.println("Seniors:");
         for(Animal animal : Animal.getSeniorAnimals())
@@ -14,7 +14,7 @@ public class Main {
         }
         System.out.println();;
 
-        animal1.setBirthDate("12.05.2020");
+        //animal1.setBirthDate("12.05.2020");
         animal1.setWeight(12);
         Animal.showAnimals();
 
@@ -28,9 +28,11 @@ public class Main {
 
         System.out.println("\nBefore Serialization:");
         Animal.showAnimals();
-        Animal.serializeAll("animals.dat");
+
+        Animal.saveToFile("animals.dat");
+        Animal.readFromFile("animals.dat");
+
         System.out.println("\nAfter serialization:");
-        Animal.deserializeAll("animals.dat");
         Animal.showAnimals();
     }
 }
