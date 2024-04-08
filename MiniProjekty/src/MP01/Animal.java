@@ -11,7 +11,7 @@ public class Animal implements Serializable {
 
     private String name;
     private LocalDate birthDate; //Atr. złożony
-    private Optional<Double> weight = Optional.empty();  //Atr. opcjonalny
+    private Double weight;  //Atr. opcjonalny
     private List<Owner> owners = new ArrayList<Owner>(); //Atr. powt. //Atr. złożony
     private int age;//Atr. pochodny
     private static int minSeniorAge = 10; //Atr. klasowy
@@ -31,14 +31,14 @@ public class Animal implements Serializable {
     public Animal(String name, String birthDate, double weight) {
         this.name = name;
         this.birthDate = LocalDate.parse(birthDate);
-        setWeight(weight);
+        this.weight = weight;
         addAnimal(this);
     }
 
     public Animal(String name, double weight) {
         this.name = name;
         birthDate = LocalDate.now();
-        setWeight(weight);
+        this.weight = weight;
         addAnimal(this);
     }
 
@@ -54,7 +54,7 @@ public class Animal implements Serializable {
         return name;
     }
 
-    public Optional<Double> getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
@@ -67,7 +67,7 @@ public class Animal implements Serializable {
     }
 
     public boolean getIsSenior(){
-        return getAge() > minSeniorAge;
+        return getAge() >= minSeniorAge;
     }
 
     public List<Owner> getOwners() {
@@ -79,7 +79,7 @@ public class Animal implements Serializable {
     }
 
     public void setWeight(double weight) {
-        this.weight = Optional.of(weight);
+        this.weight = weight;
     }
 
     public static void showAnimals() {//Met. klasowa
@@ -105,8 +105,8 @@ public class Animal implements Serializable {
         for(Owner owner : owners) {
             ownersString.append(owner.toString());
         }
-        return name + " { age: " + getAge() + ", weight: " + (getWeight().isPresent() ? weight : "unknown")
-                + ", senior: " + (isSenior ? "yes" : "no" )+ ", owners: " + ownersString + " }";
+        return name + " { age: " + getAge() + ", weight: " + (getWeight() == null ? "unknown" : weight)
+                + ", senior: " + (getIsSenior() ? "yes" : "no" )+ ", owners: " + ownersString + " }";
     }
 
     //Ekst. - trwałość
@@ -122,7 +122,7 @@ public class Animal implements Serializable {
         try {
             serializeAll(new ObjectOutputStream(new FileOutputStream(fileName)));
         } catch(IOException ex){
-            System.out.println("No such file or directory");
+            System.out.println("Error while saving to file");
         }
     }
 
@@ -130,7 +130,7 @@ public class Animal implements Serializable {
         try {
             deserializeAll(new ObjectInputStream(new FileInputStream(fileName)));
         } catch(IOException ex) {
-            System.out.println("No such file or directory");
+            System.out.println("Error while reading from file");
         } catch(ClassNotFoundException ex) {
             System.out.println("Class not found");
         }

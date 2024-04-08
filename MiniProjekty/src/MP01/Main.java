@@ -3,9 +3,9 @@ package MP01;
 public class Main {
     public static void main(String[] args) {
         Animal animal1 = new Animal("Miauczur");
-        Animal animal2 = new Animal("Burek");
-        Animal animal3 = new Animal("Tofi", 15);
-        Animal animal4 = new Animal("Mruczek", 10);
+        Animal animal2 = new Animal("Burek", "2019-03-10");
+        Animal animal3 = new Animal("Tofi", "2020-02-06", 15);
+        Animal animal4 = new Animal("Mruczek", "2014-01-07", 10);
 
         System.out.println("Seniors:");
         for(Animal animal : Animal.getSeniorAnimals())
@@ -14,7 +14,7 @@ public class Main {
         }
         System.out.println();;
 
-        //animal1.setBirthDate("12.05.2020");
+        animal1.setBirthDate("2020-05-12");
         animal1.setWeight(12);
         Animal.showAnimals();
 
