@@ -4,26 +4,18 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Animal implements Serializable {
     private static List<Animal> allAnimals = new ArrayList<Animal>(); //Ekstensja
 
     private String name;
     private LocalDate birthDate; //Atr. złożony
-    private double weight; //Atr. opcjonalny
+    private Optional<Double> weight = Optional.empty();  //Atr. opcjonalny
     private List<Owner> owners = new ArrayList<Owner>(); //Atr. powt. //Atr. złożony
-    private int age;/* { //Atr. pochodny
-        get {
-        DateTime today = DateTime.Today;
-        int age = today.Year - birthDate.Year;
-        if (birthDate.AddYears(age) > today)
-            age--;
-        return age;
-        }
-    }
-    */
+    private int age;//Atr. pochodny
     private static int minSeniorAge = 10; //Atr. klasowy
-    private boolean IsSenior; // => age >= _minSeniorAge;
+    private boolean isSenior;
 
     public Animal(String name) {
         this.name = name;
@@ -39,14 +31,14 @@ public class Animal implements Serializable {
     public Animal(String name, String birthDate, double weight) {
         this.name = name;
         this.birthDate = LocalDate.parse(birthDate);
-        this.weight = weight;
+        setWeight(weight);
         addAnimal(this);
     }
 
     public Animal(String name, double weight) {
         this.name = name;
         birthDate = LocalDate.now();
-        this.weight = weight;
+        setWeight(weight);
         addAnimal(this);
     }
 
@@ -62,6 +54,22 @@ public class Animal implements Serializable {
         return name;
     }
 
+    public Optional<Double> getWeight() {
+        return weight;
+    }
+
+    public int getAge(){
+        LocalDate today = LocalDate.now();
+        int age = today.getYear() - birthDate.getYear();
+        if (birthDate.plusYears(age).isAfter(today))
+            age--;
+        return age;
+    }
+
+    public boolean getIsSenior(){
+        return getAge() > minSeniorAge;
+    }
+
     public List<Owner> getOwners() {
         return owners;
     }
@@ -70,8 +78,8 @@ public class Animal implements Serializable {
         birthDate = LocalDate.parse(date);
     }
 
-    public void setWeight(double value) {
-        weight = value;
+    public void setWeight(double weight) {
+        this.weight = Optional.of(weight);
     }
 
     public static void showAnimals() {//Met. klasowa
@@ -84,7 +92,7 @@ public class Animal implements Serializable {
     public static List<Animal> getSeniorAnimals() { //Met. klasowa
         List<Animal> seniors = new ArrayList<Animal>();
         for(Animal animal : allAnimals) {
-            if (animal.IsSenior) {
+            if (animal.getIsSenior()) {
                 seniors.add(animal);
             }
         }
@@ -97,8 +105,8 @@ public class Animal implements Serializable {
         for(Owner owner : owners) {
             ownersString.append(owner.toString());
         }
-        return name + " { age: " + age + ", weight: " + (weight == 0 ? "unknown" : weight)
-                + ", senior: " + (IsSenior ? "yes" : "no" )+ ", owners: " + ownersString + " }";
+        return name + " { age: " + getAge() + ", weight: " + (getWeight().isPresent() ? weight : "unknown")
+                + ", senior: " + (isSenior ? "yes" : "no" )+ ", owners: " + ownersString + " }";
     }
 
     //Ekst. - trwałość
