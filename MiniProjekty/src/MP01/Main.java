@@ -15,6 +15,11 @@ public class Main {
         animal1.setWeight(12); //Atr. opcjonalny
         Animal.showAnimals();
 
+        // Przeciążenie
+        System.out.println("\nAnimal " + animal4.getName() + " age: " + animal4.getAge());
+        System.out.println("Animal " + animal4.getName() + " age in months: " + animal4.getAge("months"));
+        System.out.println("Animal " + animal4.getName() + " age in days: " + animal4.getAge("days"));
+
         //Dodanie właścicieli
         animal2.addOwner(owner1); //Atr. powt. //Atr. złożony
         System.out.println("\nOwners for animal " + animal2.getName() +":");

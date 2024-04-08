@@ -2,6 +2,8 @@ package MP01;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,11 +63,24 @@ public class Animal implements Serializable {
     }
 
     public int getAge(){
-        LocalDate today = LocalDate.now();
-        int age = today.getYear() - birthDate.getYear();
-        if (birthDate.plusYears(age).isAfter(today))
-            age--;
-        return age;
+        Period age = Period.between(birthDate, LocalDate.now());
+        return age.getYears();
+    }
+
+    public int getAge(String param){ //Przeciążenie
+        switch (param) {
+            case "months" -> {
+                int months = (int) ChronoUnit.MONTHS.between(birthDate, LocalDate.now());
+                return months;
+            }
+            case "days" -> {
+                int days = (int) ChronoUnit.DAYS.between(birthDate, LocalDate.now());
+                return days;
+            }
+            default -> {
+                return getAge();
+            }
+        }
     }
 
     public boolean getIsSenior(){
