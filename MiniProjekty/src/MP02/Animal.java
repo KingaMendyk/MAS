@@ -15,6 +15,8 @@ public class Animal implements Serializable {
     private List<Owner> owners = new ArrayList<>(); //Atr. powt. //Atr. złożony
     private static double minSeniorAge; //Atr. klasowy
 
+    private Room room;
+
     public Animal(String name) {
         this.name = name;
         birthDate = LocalDate.now();
