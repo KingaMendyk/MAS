@@ -53,6 +53,13 @@ public class Animal implements Serializable {
         }
     }
 
+    public void removeOwner(Owner owner){
+        if(owners.contains(owner)){
+            owners.remove(owner);
+            owner.removeAnimal(this);
+        }
+    }
+
     public String getName() {
         return name;
     }

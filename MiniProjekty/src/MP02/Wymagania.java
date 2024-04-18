@@ -8,4 +8,6 @@ public class Wymagania {
         oraz
         automatyczne tworzenie poł. zwrotnego)
      */
+
+    //TODO Dodać metody usuwania i dodawania asocjacji
 }

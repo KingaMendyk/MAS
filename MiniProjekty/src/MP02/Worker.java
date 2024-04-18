@@ -13,7 +13,15 @@ public class Worker extends Person {
         this.hotel = hotel;
     }
 
+    public void removeHotel(){
+        this.hotel = null;
+    }
+
     public int getId(){
         return id;
+    }
+
+    public Hotel getHotel(){
+        return hotel;
     }
 }

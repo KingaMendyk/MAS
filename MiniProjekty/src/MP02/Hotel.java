@@ -9,8 +9,7 @@ public class Hotel implements Serializable {
     private String name;
     private List<Room> rooms = new ArrayList<>();
     private static Set<Room> allRooms = new HashSet<>();
-
-    private Map<Integer, Worker> workerQualif = new TreeMap<>();
+    private Map<Integer, Worker> workers = new TreeMap<>();
 
     public Hotel(String name){
         this.name = name;
@@ -32,18 +31,34 @@ public class Hotel implements Serializable {
         }
     }
 
-    public void addWorkerQualif(Worker newWorker) {
-        if(!workerQualif.containsKey(newWorker.getId())) {
-            workerQualif.put(newWorker.getId(), newWorker);
+    public void removeRoom(){
+        //TODO
+    }
+
+    public void addWorker(Worker newWorker) {
+        if(!workers.containsKey(newWorker.getId())) {
+            workers.put(newWorker.getId(), newWorker);
             newWorker.addHotel(this);
         }
     }
 
-    public Worker findWorkerQualif(int id) {
-        if(!workerQualif.containsKey(id)) {
+    public Worker findWorker(int id) {
+        if(!workers.containsKey(id)) {
             System.out.println("Can't find worker with id: " + id);
         }
-        return workerQualif.get(id);
+        return workers.get(id);
+    }
+
+    public void removeWorker(Worker worker){
+        if(workers.containsKey(worker.getId())){
+            workers.remove(worker.getId());
+            if(worker.getHotel() == this)
+                worker.removeHotel();
+        }
+    }
+
+    public Map<Integer, Worker> getWorkers(){
+        return workers;
     }
 
 
