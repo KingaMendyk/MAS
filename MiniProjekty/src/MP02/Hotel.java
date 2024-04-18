@@ -25,6 +25,10 @@ public class Hotel {
         }
     }
 
+    public List<Room> getRooms(){
+        return rooms;
+    }
+
     @Override
     public String toString(){
         StringBuilder roomString = new StringBuilder();
