@@ -45,7 +45,10 @@ public class Animal implements Serializable {
     }
 
     public void addOwner(Owner owner) {
-        owners.add(owner);
+        if(!owners.contains(owner)) {
+            owners.add(owner);
+            owner.addAnimal(this);
+        }
     }
 
     public String getName() {
@@ -56,7 +59,7 @@ public class Animal implements Serializable {
         return weight;
     }
 
-    public int getAge(){ //Atr. pochodny
+    public int getAge() { //Atr. pochodny
         int age = (int) ChronoUnit.YEARS.between(birthDate, LocalDate.now());
         return age;
     }
