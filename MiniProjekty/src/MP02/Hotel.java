@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Hotel implements Serializable {
-    private static List<Hotel> allHotels;
+    private static List<Hotel> allHotels = new ArrayList<>();
 
     private String name;
     private List<Room> rooms = new ArrayList<>();
-    private static Set<Room> allRooms = new HashSet<>();
-    private Map<Integer, Worker> workers = new TreeMap<>();
+    private static Set<Room> allRooms = new HashSet<>(); //Kompozycja
+    private Map<Integer, Worker> workers = new TreeMap<>(); //Asocjacja kwalifikowana
 
     public Hotel(String name){
         this.name = name;
@@ -20,10 +20,12 @@ public class Hotel implements Serializable {
         allHotels.add(hotel);
     }
 
+    //Kompozycja
     public void addRoom(Room room){
         if(!rooms.contains(room)) {
             if (allRooms.contains(room)) {
-                System.out.println("Room already exists in ");
+                System.out.println("Room already exists in hotel " + room.getHotel().getName());
+                return;
             }
 
             rooms.add(room);
@@ -31,10 +33,14 @@ public class Hotel implements Serializable {
         }
     }
 
-    public void removeRoom(){
-        //TODO
+    public void removeRoom(Room room){
+        if(rooms.contains(room)){
+            rooms.remove(room);
+            allRooms.remove(room);
+        }
     }
 
+    //Asocjacja kwalifikowana
     public void addWorker(Worker newWorker) {
         if(!workers.containsKey(newWorker.getId())) {
             workers.put(newWorker.getId(), newWorker);
@@ -45,6 +51,7 @@ public class Hotel implements Serializable {
     public Worker findWorker(int id) {
         if(!workers.containsKey(id)) {
             System.out.println("Can't find worker with id: " + id);
+            return null;
         }
         return workers.get(id);
     }

@@ -2,7 +2,7 @@ package MP02;
 
 public class Worker extends Person {
     private int id;
-    private Hotel hotel;
+    private Hotel hotel; //Asocjacja kwalifikowana
 
     public Worker(int id, String name, String surname) {
         super(name, surname);

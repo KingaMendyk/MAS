@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Owner extends Person {
-    private List<Animal> animals = new ArrayList<Animal>();
+    private List<Animal> animals = new ArrayList<Animal>(); //Asocjacja zwykła
 
     public Owner(String name, String surname){
         super(name, surname);

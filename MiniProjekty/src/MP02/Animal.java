@@ -57,6 +57,20 @@ public class Animal implements Serializable {
         owner.removeAnimal(this);
     }
 
+    //Asocjacja z atrybutem
+    public void addAnimalRoom(AnimalRoom animalRoom)
+    {
+        if(!animalInRoom.contains(animalRoom)) {
+            animalInRoom.add(animalRoom);
+        }
+    }
+    public void removeAnimalRoom(AnimalRoom animalRoom){
+        if(animalInRoom.contains(animalRoom)) {
+            animalInRoom.remove(animalRoom);
+            animalRoom.remove(this);
+        }
+    }
+
     public String getName() {
         return name;
     }
