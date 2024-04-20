@@ -21,20 +21,13 @@ public class Main {
         System.out.println("Animal " + animal4.getName() + " age in days: " + animal4.getAge("days"));
 
         //Dodanie właścicieli
-        animal2.addOwner(owner1); //Atr. powt. //Atr. złożony
-        System.out.println("\nOwners for animal " + animal2.getName() +":");
-        for(Owner o : animal2.getOwners())
-        {
-            System.out.println(o);
-        }
+        animal2.setOwner(owner1); //Atr. powt. //Atr. złożony
+        System.out.println("\nOwner for animal " + animal2.getName() +":");
+        System.out.println(animal2.getOwner());
 
-        animal3.addOwner(owner1); //Atr. powt. //Atr. złożony
-        animal3.addOwner(owner2); //Atr. powt. //Atr. złożony
-        System.out.println("\nOwners for animal " + animal3.getName() + ":");
-        for(Owner o : animal3.getOwners())
-        {
-            System.out.println(o);
-        }
+        animal3.setOwner(owner2); //Atr. powt. //Atr. złożony
+        System.out.println("\nOwner for animal " + animal3.getName() +":");
+        System.out.println(animal3.getOwner());
 
         Animal.setMinSeniorAge(10); //Atr. klasowy
         System.out.println("\nSeniors:");

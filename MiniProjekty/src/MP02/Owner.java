@@ -13,7 +13,7 @@ public class Owner extends Person {
     public void addAnimal(Animal animal){
         if(!animals.contains(animal)){
             animals.add(animal);
-            animal.addOwner(this);
+            animal.setOwner(this);
         }
     }
 

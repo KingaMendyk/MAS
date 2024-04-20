@@ -12,8 +12,9 @@ public class Animal implements Serializable {
     private String name;
     private LocalDate birthDate; //Atr. złożony
     private Double weight;  //Atr. opcjonalny
-    private List<Owner> owners = new ArrayList<>(); //Atr. powt. //Atr. złożony
+    private Owner owner; //Atr. złożony //Asocjacja zwykła
     private static double minSeniorAge; //Atr. klasowy
+    private List<AnimalRoom> animalInRoom = new ArrayList<>(); //Asocjacja z atrybutem
 
     private Room room;
 
@@ -46,18 +47,14 @@ public class Animal implements Serializable {
         allAnimals.add(animal);
     }
 
-    public void addOwner(Owner owner) {
-        if(!owners.contains(owner)) {
-            owners.add(owner);
-            owner.addAnimal(this);
-        }
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+        owner.addAnimal(this);
     }
 
     public void removeOwner(Owner owner){
-        if(owners.contains(owner)){
-            owners.remove(owner);
-            owner.removeAnimal(this);
-        }
+        this.owner = null;
+        owner.removeAnimal(this);
     }
 
     public String getName() {
@@ -93,8 +90,8 @@ public class Animal implements Serializable {
         return getAge() >= minSeniorAge;
     }
 
-    public List<Owner> getOwners() {
-        return owners;
+    public Owner getOwner() {
+        return owner;
     }
 
     public void setBirthDate(String date) {
@@ -128,16 +125,8 @@ public class Animal implements Serializable {
 
     @Override
     public String toString() { //Przesłonięcie
-        StringBuilder ownersString = new StringBuilder();
-        if(!owners.isEmpty()){
-            for(int i = 0; i < owners.size() - 1; i++) {
-                ownersString.append(owners.get(i));
-                ownersString.append(", ");
-            }
-            ownersString.append(owners.get(owners.size()-1));
-        }
         return name + " { age: " + getAge() + ", weight: " + (getWeight() == null ? "unknown" : weight)
-                + ", senior: " + (getIsSenior() ? "yes" : "no" )+ ", owners: " + ownersString + " }";
+                + ", senior: " + (getIsSenior() ? "yes" : "no" )+ ", owners: " + owner.toString() + " }";
     }
 
     //Ekst. - trwałość
