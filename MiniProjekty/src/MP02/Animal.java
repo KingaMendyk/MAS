@@ -48,13 +48,17 @@ public class Animal implements Serializable {
     }
 
     public void setOwner(Owner owner) {
-        this.owner = owner;
-        owner.addAnimal(this);
+        if(this.owner == null){
+            this.owner = owner;
+            owner.addAnimal(this);
+        }
     }
 
-    public void removeOwner(Owner owner){
-        this.owner = null;
-        owner.removeAnimal(this);
+    public void removeOwner(){
+        if(owner != null){
+            owner.removeAnimal(this);
+            owner = null;
+        }
     }
 
     //Asocjacja z atrybutem

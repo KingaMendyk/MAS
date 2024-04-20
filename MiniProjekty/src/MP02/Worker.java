@@ -10,11 +10,17 @@ public class Worker extends Person {
     }
 
     public void addHotel(Hotel hotel){
-        this.hotel = hotel;
+        if(this.hotel == null){
+            this.hotel = hotel;
+            hotel.addWorker(this);
+        }
     }
 
     public void removeHotel(){
-        this.hotel = null;
+        if(hotel != null){
+            hotel.removeWorker(this);
+            hotel = null;
+        }
     }
 
     public int getId(){

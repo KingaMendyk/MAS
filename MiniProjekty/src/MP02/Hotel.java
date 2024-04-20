@@ -41,10 +41,10 @@ public class Hotel implements Serializable {
     }
 
     //Asocjacja kwalifikowana
-    public void addWorker(Worker newWorker) {
-        if(!workers.containsKey(newWorker.getId())) {
-            workers.put(newWorker.getId(), newWorker);
-            newWorker.addHotel(this);
+    public void addWorker(Worker worker) {
+        if(!workers.containsKey(worker.getId())) {
+            workers.put(worker.getId(), worker);
+            worker.addHotel(this);
         }
     }
 
@@ -59,8 +59,7 @@ public class Hotel implements Serializable {
     public void removeWorker(Worker worker){
         if(workers.containsKey(worker.getId())){
             workers.remove(worker.getId());
-            if(worker.getHotel() == this)
-                worker.removeHotel();
+            worker.removeHotel();
         }
     }
 

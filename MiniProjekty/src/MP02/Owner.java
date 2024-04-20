@@ -20,7 +20,7 @@ public class Owner extends Person {
     public void removeAnimal(Animal animal){
         if(animals.contains(animal)){
             animals.remove(animal);
-            animal.removeOwner(this);
+            animal.removeOwner();
         }
     }
 
