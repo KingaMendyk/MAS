@@ -75,6 +75,10 @@ public class Animal implements Serializable {
         }
     }
 
+    public List<AnimalRoom> getAnimalInRoom(){
+        return animalInRoom;
+    }
+
     public String getName() {
         return name;
     }
@@ -144,7 +148,7 @@ public class Animal implements Serializable {
     @Override
     public String toString() { //Przesłonięcie
         return name + " { age: " + getAge() + ", weight: " + (getWeight() == null ? "unknown" : weight)
-                + ", senior: " + (getIsSenior() ? "yes" : "no" )+ ", owners: " + owner.toString() + " }";
+                + ", senior: " + (getIsSenior() ? "yes" : "no" )+ ", owners: " + (owner == null ? "no owner" : owner.toString()) + " }";
     }
 
     //Ekst. - trwałość

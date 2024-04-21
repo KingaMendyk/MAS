@@ -44,6 +44,10 @@ public class Room {
         }
     }
 
+    public List<AnimalRoom> getAnimalInRoom(){
+        return animalInRoom;
+    }
+
     public Hotel getHotel(){
         return hotel;
     }

@@ -3,8 +3,8 @@ package MP02;
 import java.io.Serializable;
 
 public class Person implements Serializable {
-    private String name;
-    private String surname;
+    protected String name;
+    protected String surname;
 
     public Person(String name, String surname) {
         this.name = name;

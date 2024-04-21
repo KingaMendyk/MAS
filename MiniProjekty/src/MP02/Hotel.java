@@ -50,7 +50,7 @@ public class Hotel implements Serializable {
 
     public Worker findWorker(int id) {
         if(!workers.containsKey(id)) {
-            System.out.println("Can't find worker with id: " + id);
+            System.out.println("Can't find worker with id: " + id + " in hotel " + name);
             return null;
         }
         return workers.get(id);

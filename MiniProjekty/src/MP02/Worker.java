@@ -30,4 +30,9 @@ public class Worker extends Person {
     public Hotel getHotel(){
         return hotel;
     }
+
+    @Override
+    public String toString(){
+        return "Worker { id:" + id + ", name: " + name + ", surname: " + surname + ", hotel: " + (hotel == null ? "no hotel" : hotel.getName()) + " }";
+    }
 }

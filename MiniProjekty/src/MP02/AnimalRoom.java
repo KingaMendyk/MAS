@@ -23,23 +23,27 @@ public class AnimalRoom { //Atrybut asocjacji
     }
 
     public void remove(Animal animal){
-        for(AnimalRoom ar : allAnimalRooms){
-            if(ar.animal == animal){
-                allAnimalRooms.remove(ar);
+        if(animal == this.animal){
+            for(AnimalRoom ar : allAnimalRooms){
+                if(ar.animal == animal){
+                    allAnimalRooms.remove(ar);
+                }
             }
+            room.removeAnimalRoom(this);
+            this.animal = null;
         }
-        room.removeAnimalRoom(this);
-        this.animal = null;
     }
 
     public void remove(Room room){
-        for(AnimalRoom ar : allAnimalRooms){
-            if(ar.room == room){
-                allAnimalRooms.remove(ar);
+        if(room == this.room){
+            for(AnimalRoom ar : allAnimalRooms){
+                if(ar.room == room){
+                    allAnimalRooms.remove(ar);
+                }
             }
+            animal.removeAnimalRoom(this);
+            this.room = null;
         }
-        animal.removeAnimalRoom(this);
-        this.room = null;
     }
 
     public Animal getanimal(){
@@ -48,6 +52,11 @@ public class AnimalRoom { //Atrybut asocjacji
 
     public Room getRoom(){
         return room;
+    }
+
+    @Override
+    public String toString(){
+        return "Animal " + animal.getName() + " in room " + room + " from: " + dateFrom + " to: " + dateTo;
     }
 
 }
