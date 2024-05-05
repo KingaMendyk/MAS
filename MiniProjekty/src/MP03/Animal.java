@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Animal implements Serializable {
+public abstract class Animal implements Serializable {
     private static List<Animal> allAnimals = new ArrayList<>(); //Ekstensja
 
     private String name;

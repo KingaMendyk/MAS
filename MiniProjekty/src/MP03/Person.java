@@ -2,7 +2,7 @@ package MP03;
 
 import java.io.Serializable;
 
-public class Person implements Serializable {
+public abstract class Person implements Serializable {
     protected String name;
     protected String surname;
 
