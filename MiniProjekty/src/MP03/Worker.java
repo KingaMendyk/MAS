@@ -2,12 +2,14 @@ package MP03;
 
 public class Worker extends Person {
     private int id;
+    private static int latestId;
     private Hotel hotel; //Asocjacja kwalifikowana
     private int salary;
 
     public Worker(int id, String name, String surname) {
-        super(name, surname);
+        super(name, surname, PersonType.Worker);
         this.id = id;
+        latestId = id;
     }
 
     public void addHotel(Hotel hotel){
@@ -26,6 +28,10 @@ public class Worker extends Person {
 
     public int getId(){
         return id;
+    }
+
+    public static int getLatestId(){
+        return latestId;
     }
 
     public Hotel getHotel(){

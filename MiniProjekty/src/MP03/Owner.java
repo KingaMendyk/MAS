@@ -7,7 +7,7 @@ public class Owner extends Person {
     private List<Animal> animals = new ArrayList<Animal>(); //Asocjacja zwykła
 
     public Owner(String name, String surname){
-        super(name, surname);
+        super(name, surname, PersonType.Owner);
     }
 
     public void addAnimal(Animal animal){
