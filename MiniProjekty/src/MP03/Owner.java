@@ -27,4 +27,14 @@ public class Owner extends Person {
     public List<Animal> getAnimals(){
         return animals;
     }
+
+    @Override
+    public String getInfo(){
+        StringBuilder animalString = new StringBuilder();
+        for (Animal animal : animals) {
+            animalString.append(animal).append(", ");
+        }
+        animalString.deleteCharAt(animalString.length()-1);
+        return "Owner " + super.getInfo() + ", animals: {" + animalString + "}";
+    }
 }

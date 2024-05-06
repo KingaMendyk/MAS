@@ -1,10 +1,12 @@
 package MP03;
 
+import MP03.AnimalSpecies.Dog;
+
 public class Main {
     public static void main(String[] args) {
-        Animal animal1 = new Animal("Mruczek", "2014-01-07", 7);
-        Animal animal2 = new Animal("Burek", "2018-03-15", 10);
-        Animal animal3 = new Animal("Robal", "2020-07-21", 5);
+        Animal animal1 = new Dog("Mruczek");
+        Animal animal2 = new Dog("Burek");
+        Animal animal3 = new Dog("Robal");
 
         Owner owner1 = new Owner("Adam", "Adamski");
         Owner owner2 = new Owner("Beata", "Beatska");

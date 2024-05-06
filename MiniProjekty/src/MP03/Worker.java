@@ -3,6 +3,7 @@ package MP03;
 public class Worker extends Person {
     private int id;
     private Hotel hotel; //Asocjacja kwalifikowana
+    private int salary;
 
     public Worker(int id, String name, String surname) {
         super(name, surname);
@@ -32,7 +33,7 @@ public class Worker extends Person {
     }
 
     @Override
-    public String toString(){
-        return "Worker { id:" + id + ", name: " + name + ", surname: " + surname + ", hotel: " + (hotel == null ? "no hotel" : hotel.getName()) + " }";
+    public String getInfo(){
+        return "Worker " + super.getInfo() + ", id:" + id + ", hotel: " + (hotel == null ? "no hotel" : hotel.getName());
     }
 }

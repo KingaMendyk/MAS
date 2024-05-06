@@ -24,9 +24,12 @@ public abstract class Person implements Serializable {
     public void setSurname(String surname){
         this.surname = surname;
     }
+    public String getInfo(){
+        return name + " " + surname;
+    }
 
     @Override
     public String toString() {
-        return name + " " + surname;
+        return getInfo();
     }
 }
