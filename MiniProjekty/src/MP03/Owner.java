@@ -10,6 +10,10 @@ public class Owner extends Person {
         super(name, surname, PersonType.Owner);
     }
 
+    public Owner(Person person){
+        super(person.name, person.surname, PersonType.Owner);
+    }
+
     public void addAnimal(Animal animal){
         if(!animals.contains(animal)){
             animals.add(animal);

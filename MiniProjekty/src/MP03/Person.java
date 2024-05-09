@@ -25,6 +25,30 @@ public abstract class Person implements Serializable {
         }
     }
 
+    public void becomeOwner(){
+        if(!isOwner())
+            this.owner = new Owner(this);
+    }
+    public void stopBeingOwner(){
+        if(isOwner())
+            this.owner = null;
+    }
+    public void becomeWorker(){
+        if(!isWorker())
+            this.worker = new Worker(this);
+    }
+    public void stopBeingWorker(){
+        if(isWorker()){
+            this.worker = null;
+        }
+    }
+    public boolean isOwner(){
+        return this.owner != null;
+    }
+    public boolean isWorker(){
+        return this.worker != null;
+    }
+
     public String getName(){
         return this.name;
     }

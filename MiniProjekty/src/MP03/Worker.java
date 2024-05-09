@@ -12,6 +12,12 @@ public class Worker extends Person {
         latestId = id;
     }
 
+    public Worker(Person person){
+        super(person.name, person.surname, PersonType.Worker);
+        this.id = Worker.getLatestId() + 1;
+        latestId = id;
+    }
+
     public void addHotel(Hotel hotel){
         if(this.hotel == null){
             this.hotel = hotel;
