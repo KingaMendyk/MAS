@@ -3,6 +3,10 @@ package MP03;
 public class Wymagania {
     /*
     Wielodziedziczenie -->
-    Wieloaspektowe --> animal - types (land, water etc), species
+
+
+    SPRAWDZIĆ:
+    połączenia w wieloaspektowym - kompozycja
+    czy overlapping i dynamic działa
      */
 }
