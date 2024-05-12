@@ -1,5 +1,9 @@
 package MP03;
 
+import MP03.AnimalTypes.FlyingAnimal;
+import MP03.AnimalTypes.LandAnimal;
+import MP03.AnimalTypes.WaterAnimal;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -15,6 +19,7 @@ public abstract class Animal implements Serializable {
     private Owner owner; //Atr. złożony //Asocjacja zwykła
     private static double minSeniorAge; //Atr. klasowy
     private List<AnimalRoom> animalInRoom = new ArrayList<>(); //Asocjacja z atrybutem
+    private Type animalType; //Dziedziczenie wieloaspektowe - kompozycja z klasą Type
 
     private Room room;
 
@@ -22,6 +27,18 @@ public abstract class Animal implements Serializable {
         this.name = name;
         birthDate = LocalDate.now();
         addAnimal(this);
+    }
+
+    public Animal(String name, AnimalType animalType) {
+        this.name = name;
+        birthDate = LocalDate.now();
+        addAnimal(this);
+        switch (animalType) {
+            case Land -> this.animalType = new LandAnimal();
+            case Water -> this.animalType = new WaterAnimal();
+            case Flying -> this.animalType = new FlyingAnimal();
+            default -> this.animalType = null;
+        }
     }
 
     public Animal(String name, String birthDate) {

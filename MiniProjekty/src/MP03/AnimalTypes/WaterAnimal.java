@@ -1,9 +1,7 @@
 package MP03.AnimalTypes;
 
-import MP03.Animal;
+import MP03.Type;
 
-public class WaterAnimal extends Animal {
-    public WaterAnimal(String name) {
-        super(name);
-    }
+public class WaterAnimal extends Type {
+
 }
