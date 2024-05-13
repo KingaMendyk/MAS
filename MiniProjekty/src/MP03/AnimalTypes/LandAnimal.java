@@ -4,7 +4,7 @@ import MP03.Animal;
 import MP03.Type;
 
 public class LandAnimal extends Type {
-    private int preferredRoomSize;
+    private int preferredRoomSize = 5;
 
     public LandAnimal(Animal animal) {
         super(animal);

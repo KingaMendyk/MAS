@@ -33,6 +33,8 @@ public class Main {
 
 
         //wielodziedziczenie
-        
+        System.out.println(cat.getAnimalType().getRoomSize());
+        System.out.println(fish.getAnimalType().getRoomSize());
+        System.out.println(frog.getAnimalType().getRoomSize());
     }
 }

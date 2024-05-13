@@ -6,7 +6,7 @@ import MP03.Type;
 public class FlyingAnimal extends Type {
     private double flightDuration;
     private double flightHeight;
-    private int cageSize;
+    private int cageSize = 10;
 
     public FlyingAnimal(Animal animal) {
         super(animal);

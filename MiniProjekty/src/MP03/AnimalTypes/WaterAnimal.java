@@ -4,7 +4,7 @@ import MP03.Animal;
 import MP03.Type;
 
 public class WaterAnimal extends Type implements ISwimming {
-    private int aquariumSize;
+    private int aquariumSize = 10;
 
     public WaterAnimal(Animal animal) {
         super(animal);

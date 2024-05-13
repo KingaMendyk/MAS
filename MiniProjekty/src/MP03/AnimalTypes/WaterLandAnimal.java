@@ -3,7 +3,7 @@ package MP03.AnimalTypes;
 import MP03.Animal;
 
 public class WaterLandAnimal extends LandAnimal implements ISwimming { //wielodziedziczenie z wykorzystaniem interfejsu - klasy WaterAnimal, LandAnimal
-    private int aquariumSize;
+    private int aquariumSize = 10;
 
     public WaterLandAnimal(Animal animal) {
         super(animal);

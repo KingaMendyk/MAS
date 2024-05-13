@@ -2,6 +2,8 @@ package MP03.AnimalSpecies;
 
 import MP03.Animal;
 import MP03.AnimalType;
+import MP03.AnimalTypes.FlyingAnimal;
+import MP03.AnimalTypes.LandAnimal;
 
 public class Parrot extends Animal {
 
@@ -10,6 +12,7 @@ public class Parrot extends Animal {
     }
     public Parrot(String name, int weight) {
         super(name, weight);
+        super.setAnimalType(new FlyingAnimal(this));
     }
 
     @Override

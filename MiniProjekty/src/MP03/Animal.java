@@ -25,7 +25,6 @@ public abstract class Animal implements Serializable {
     private Room room;
 
     protected double foodAmount;
-
     public Animal(String name) {
         this.name = name;
         birthDate = LocalDate.now();
@@ -141,6 +140,14 @@ public abstract class Animal implements Serializable {
 
     public Owner getOwner() {
         return owner;
+    }
+
+    public Type getAnimalType(){
+        return animalType;
+    }
+
+    public void setAnimalType(Type animalType){
+        this.animalType = animalType;
     }
 
     public void setBirthDate(String date) {
