@@ -5,6 +5,7 @@ public class Worker extends Person {
     private static int latestId;
     private Hotel hotel; //Asocjacja kwalifikowana
     private int salary;
+    private Person person;
 
     public Worker(int id, String name, String surname) {
         super(name, surname, PersonType.Worker);
@@ -16,6 +17,7 @@ public class Worker extends Person {
         super(person.name, person.surname, PersonType.Worker);
         this.id = Worker.getLatestId() + 1;
         latestId = id;
+        this.person = person;
     }
 
     public void addHotel(Hotel hotel){
@@ -42,6 +44,14 @@ public class Worker extends Person {
 
     public Hotel getHotel(){
         return hotel;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     @Override

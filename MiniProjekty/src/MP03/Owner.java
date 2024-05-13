@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Owner extends Person {
     private List<Animal> animals = new ArrayList<Animal>(); //Asocjacja zwykła
+    private Person person;
 
     public Owner(String name, String surname){
         super(name, surname, PersonType.Owner);
@@ -12,6 +13,7 @@ public class Owner extends Person {
 
     public Owner(Person person){
         super(person.name, person.surname, PersonType.Owner);
+        this.person = person;
     }
 
     public void addAnimal(Animal animal){
@@ -30,6 +32,14 @@ public class Owner extends Person {
 
     public List<Animal> getAnimals(){
         return animals;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     @Override

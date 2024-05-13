@@ -13,5 +13,11 @@ public class Main {
         Owner owner1 = new Owner("Adam", "Adamski");
         Owner owner2 = new Owner("Beata", "Beatska");
 
+        //disjoint
+        //overlapping
+        //dynamic
+        //wieloaspektowe
+        //wielodziedziczenie
+
     }
 }

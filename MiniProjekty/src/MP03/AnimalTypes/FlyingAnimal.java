@@ -1,11 +1,16 @@
 package MP03.AnimalTypes;
 
+import MP03.Animal;
 import MP03.Type;
 
 public class FlyingAnimal extends Type {
     private float flightDuration;
     private float flightHeight;
     private int cageSize;
+
+    public FlyingAnimal(Animal animal) {
+        super(animal);
+    }
 
     public float getFlightDuration() {
         return flightDuration;

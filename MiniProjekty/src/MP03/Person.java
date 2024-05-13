@@ -30,8 +30,10 @@ public abstract class Person implements Serializable {
             this.owner = new Owner(this);
     }
     public void stopBeingOwner(){
-        if(isOwner())
+        if(isOwner()) {
+            this.owner.setPerson(null);
             this.owner = null;
+        }
     }
     public void becomeWorker(){
         if(!isWorker())
@@ -39,6 +41,7 @@ public abstract class Person implements Serializable {
     }
     public void stopBeingWorker(){
         if(isWorker()){
+            this.worker.setPerson(null);
             this.worker = null;
         }
     }

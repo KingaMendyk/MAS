@@ -35,10 +35,10 @@ public abstract class Animal implements Serializable {
         birthDate = LocalDate.now();
         addAnimal(this);
         switch (animalType) {
-            case Land -> this.animalType = new LandAnimal();
-            case Water -> this.animalType = new WaterAnimal();
-            case Flying -> this.animalType = new FlyingAnimal();
-            case WaterLand -> this.animalType = new WaterLandAnimal();
+            case Land -> this.animalType = new LandAnimal(this);
+            case Water -> this.animalType = new WaterAnimal(this);
+            case Flying -> this.animalType = new FlyingAnimal(this);
+            case WaterLand -> this.animalType = new WaterLandAnimal(this);
             default -> this.animalType = null;
         }
     }
