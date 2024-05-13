@@ -14,7 +14,8 @@ public class Worker extends Person {
     }
 
     public Worker(Person person){
-        super(person.name, person.surname, PersonType.Worker);
+        name = person.name;
+        surname = person.surname;
         this.id = Worker.getLatestId() + 1;
         latestId = id;
         this.person = person;
@@ -56,6 +57,6 @@ public class Worker extends Person {
 
     @Override
     public String getInfo(){
-        return "Worker " + super.getInfo() + ", id:" + id + ", hotel: " + (hotel == null ? "no hotel" : hotel.getName());
+        return "Worker " + name + " " + surname + ", id: " + id + ", hotel: " + (hotel == null ? "no hotel" : hotel.getName());
     }
 }

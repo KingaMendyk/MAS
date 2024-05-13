@@ -14,8 +14,18 @@ public class Main {
         Owner owner2 = new Owner("Beata", "Beatska");
 
         //disjoint
+
         //overlapping
         //dynamic
+        Person person1 = new Person("Cecylia", "Cecylska", PersonType.Worker);
+        System.out.println(person1);
+        person1.becomeOwner();
+        System.out.println(person1);
+        person1.stopBeingWorker();
+        System.out.println(person1);
+
+
+
         //wieloaspektowe
         //wielodziedziczenie
 

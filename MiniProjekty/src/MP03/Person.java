@@ -2,47 +2,74 @@ package MP03;
 
 import java.io.Serializable;
 
-public abstract class Person implements Serializable {
+public class Person implements Serializable {
     protected String name;
     protected String surname;
 
     // Dziedziczenie overlapping za pomoca kompozycji
     private Owner owner;
     private Worker worker;
+    private PersonType personType;
 
+    public Person(){
+
+    }
 
     public Person(String name, String surname, PersonType type) {
         this.name = name;
         this.surname = surname;
+        this.personType = type;
 
         switch(type){
-            case Owner -> owner = new Owner(name, surname);
-            case Worker -> worker = new Worker(Worker.getLatestId() + 1, name, surname);
+            case Owner -> owner = new Owner(this);
+            case Worker -> worker = new Worker(this);
             case Owner_Worker -> {
-                owner = new Owner(name, surname);
-                worker = new Worker(Worker.getLatestId() + 1, name, surname);
+                owner = new Owner(this);
+                worker = new Worker(this);
             }
         }
     }
 
     public void becomeOwner(){
-        if(!isOwner())
+        if(!isOwner()) {
             this.owner = new Owner(this);
+            if(personType == PersonType.Worker)
+                personType = PersonType.Owner_Worker;
+            else{
+                personType = PersonType.Owner;
+            }
+        }
     }
     public void stopBeingOwner(){
         if(isOwner()) {
             this.owner.setPerson(null);
             this.owner = null;
+            if(personType == PersonType.Owner_Worker)
+                personType = PersonType.Worker;
+            else{
+                personType = null;
+            }
         }
     }
     public void becomeWorker(){
-        if(!isWorker())
+        if(!isWorker()) {
             this.worker = new Worker(this);
+            if(personType == PersonType.Owner)
+                personType = PersonType.Owner_Worker;
+            else{
+                personType = PersonType.Worker;
+            }
+        }
     }
     public void stopBeingWorker(){
         if(isWorker()){
             this.worker.setPerson(null);
             this.worker = null;
+            if(personType == PersonType.Owner_Worker)
+                personType = PersonType.Owner;
+            else{
+                personType = null;
+            }
         }
     }
     public boolean isOwner(){
@@ -66,7 +93,22 @@ public abstract class Person implements Serializable {
         this.surname = surname;
     }
     public String getInfo(){
-        return name + " " + surname;
+        switch(personType){
+            case Owner -> {
+                return owner.getInfo();
+            }
+            case Worker -> {
+                return worker.getInfo();
+            }
+            case Owner_Worker -> {
+                return "Worker and Owner: " +
+                        owner.getInfo() + " " +
+                        worker.getInfo();
+            }
+            default -> {
+                return name + " " + surname;
+            }
+        }
     }
 
     @Override

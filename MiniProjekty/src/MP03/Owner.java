@@ -12,7 +12,8 @@ public class Owner extends Person {
     }
 
     public Owner(Person person){
-        super(person.name, person.surname, PersonType.Owner);
+        name = person.name;
+        surname = person.surname;
         this.person = person;
     }
 
@@ -45,10 +46,12 @@ public class Owner extends Person {
     @Override
     public String getInfo(){
         StringBuilder animalString = new StringBuilder();
-        for (Animal animal : animals) {
-            animalString.append(animal).append(", ");
+        if(animals.size() > 0) {
+            for (Animal animal : animals) {
+                animalString.append(animal).append(", ");
+            }
+            animalString.deleteCharAt(animalString.length() - 1);
         }
-        animalString.deleteCharAt(animalString.length()-1);
-        return "Owner " + super.getInfo() + ", animals: {" + animalString + "}";
+        return "Owner " + name + " " + surname + ", animals: {" + animalString + "}";
     }
 }
