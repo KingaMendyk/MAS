@@ -2,32 +2,37 @@ package MP03;
 
 import MP03.AnimalSpecies.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        Cat cat = new Cat("Mruczek");
-        Dog dog = new Dog("Burek");
-        Parrot parrot = new Parrot("Ziutek");
-        Animal fish = new Fish("Nemo");
-        Animal frog = new Frog("Robal");
-
-        Owner owner1 = new Owner("Adam", "Adamski");
-        Owner owner2 = new Owner("Beata", "Beatska");
-
         //disjoint
+        Cat cat = new Cat("Mruczek", 10);
+        Dog dog = new Dog("Burek", 16);
+        Parrot parrot = new Parrot("Ziutek", 4);
+        Animal fish = new Fish("Nemo", 2);
+        Animal frog = new Frog("Robal", 4);
+
+        for (Animal animal : Animal.getAllAnimals()) {
+            animal.feed();
+            System.out.println(animal.getName() + " food amount: " + animal.getFoodAmount());
+        }
+        System.out.println();
 
         //overlapping
         //dynamic
-        Person person1 = new Person("Cecylia", "Cecylska", PersonType.Worker);
+        Person person1 = new Person("Adam", "Adamski", PersonType.Worker);
         System.out.println(person1);
         person1.becomeOwner();
         System.out.println(person1);
         person1.stopBeingWorker();
         System.out.println(person1);
 
-
-
         //wieloaspektowe
-        //wielodziedziczenie
 
+
+        //wielodziedziczenie
+        
     }
 }

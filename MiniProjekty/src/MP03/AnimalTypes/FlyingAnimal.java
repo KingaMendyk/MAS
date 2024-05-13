@@ -4,27 +4,27 @@ import MP03.Animal;
 import MP03.Type;
 
 public class FlyingAnimal extends Type {
-    private float flightDuration;
-    private float flightHeight;
+    private double flightDuration;
+    private double flightHeight;
     private int cageSize;
 
     public FlyingAnimal(Animal animal) {
         super(animal);
     }
 
-    public float getFlightDuration() {
+    public double getFlightDuration() {
         return flightDuration;
     }
 
-    public void setFlightDuration(float flightDuration) {
+    public void setFlightDuration(double flightDuration) {
         this.flightDuration = flightDuration;
     }
 
-    public float getFlightHeight() {
+    public double getFlightHeight() {
         return flightHeight;
     }
 
-    public void setFlightHeight(float flightHeight) {
+    public void setFlightHeight(double flightHeight) {
         this.flightHeight = flightHeight;
     }
 

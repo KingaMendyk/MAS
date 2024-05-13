@@ -24,6 +24,8 @@ public abstract class Animal implements Serializable {
 
     private Room room;
 
+    protected double foodAmount;
+
     public Animal(String name) {
         this.name = name;
         birthDate = LocalDate.now();
@@ -60,6 +62,12 @@ public abstract class Animal implements Serializable {
         birthDate = LocalDate.now();
         this.weight = weight;
         addAnimal(this);
+    }
+
+    public abstract void feed();
+
+    public double getFoodAmount() {
+        return foodAmount;
     }
 
     private static void addAnimal(Animal animal) {
@@ -145,6 +153,10 @@ public abstract class Animal implements Serializable {
 
     public static void setMinSeniorAge(double minAge){
         minSeniorAge = minAge;
+    }
+
+    public static List<Animal> getAllAnimals(){
+        return allAnimals;
     }
 
     public static void showAnimals() {//Met. klasowa

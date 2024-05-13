@@ -8,4 +8,12 @@ public class Frog extends Animal {
     public Frog(String name) {
         super(name, AnimalType.WaterLand);
     }
+    public Frog(String name, int weight) {
+        super(name, weight);
+    }
+
+    @Override
+    public void feed() {
+        foodAmount = 4;
+    }
 }
