@@ -3,6 +3,7 @@ package MP03;
 import MP03.AnimalTypes.FlyingAnimal;
 import MP03.AnimalTypes.LandAnimal;
 import MP03.AnimalTypes.WaterAnimal;
+import MP03.AnimalTypes.WaterLandAnimal;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -37,6 +38,7 @@ public abstract class Animal implements Serializable {
             case Land -> this.animalType = new LandAnimal();
             case Water -> this.animalType = new WaterAnimal();
             case Flying -> this.animalType = new FlyingAnimal();
+            case WaterLand -> this.animalType = new WaterLandAnimal();
             default -> this.animalType = null;
         }
     }
