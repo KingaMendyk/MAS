@@ -8,7 +8,7 @@ public class Wymagania {
         - Subset ->
         + Ordered -> lista zwierząt właściciela w kolejności dodania
         - Bag -> kilka hoteli podlega pod jednego managera
-        - Xor -> worker jest albo menadzerem, albo zwykłym pracownikiem
+        + Xor -> worker jest albo menadzerem, albo zwykłym pracownikiem
         - Ograniczenie Własne ->
      */
 }

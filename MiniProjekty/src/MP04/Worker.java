@@ -4,15 +4,21 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Worker extends Person {
-    private int id; //Ograniczenie {unique}
+    protected int id; //Ograniczenie {unique}
     private static Set<Integer> allIds = new TreeSet<Integer>();
-    private Hotel hotel; //Asocjacja kwalifikowana
-    private int salary;
-    private int workHours; //Ograniczenie statyczne atrybutu
+    protected Hotel hotel; //Asocjacja kwalifikowana
+    protected int salary;
+    protected int workHours; //Ograniczenie statyczne atrybutu
     private static int maxWorkHours;
     private static int minWorHours;
     private Person person;
+    private StaffWorker staffWorker;
+    private HotelManager hotelManager;
     private WorkerType workerType;
+
+    public Worker(){
+
+    }
 
     public Worker(int id, String name, String surname) {
         super(name, surname, PersonType.Worker);
@@ -21,6 +27,16 @@ public class Worker extends Person {
 
     public Worker(Person person){
         this.person = person;
+    }
+
+    public Worker(int id, String name, String surname, WorkerType workerType) {
+        super(name, surname, PersonType.Worker);
+        setId(id);
+        this.workerType = workerType;
+        switch(workerType){
+            case Staff -> staffWorker = new StaffWorker(this);
+            case Manager -> hotelManager = new HotelManager(this);
+        }
     }
 
     public void addHotel(Hotel hotel){
@@ -94,6 +110,16 @@ public class Worker extends Person {
 
     @Override
     public String getInfo(){
-        return "Worker " + name + " " + surname + ", id: " + id + ", hotel: " + (hotel == null ? "no hotel" : hotel.getName());
+        switch(workerType){
+            case Staff -> {
+                return staffWorker.getInfo();
+            }
+            case Manager -> {
+                return hotelManager.getInfo();
+            }
+            default -> {
+                return "Worker " + name + " " + surname;
+            }
+        }
     }
 }
