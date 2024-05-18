@@ -2,10 +2,9 @@ package MP04;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class Owner extends Person {
-    private Vector<Animal> animals = new Vector<Animal>(); //Asocjacja zwykła //Ograniczenie {ordered}
+    private List<Animal> animals = new ArrayList<Animal>(); //Asocjacja zwykła //Ograniczenie {ordered}
     private Person person;
 
     public Owner(String name, String surname){
@@ -30,7 +29,7 @@ public class Owner extends Person {
         }
     }
 
-    public Vector<Animal> getAnimals(){
+    public List<Animal> getAnimals(){
         return animals;
     }
 
