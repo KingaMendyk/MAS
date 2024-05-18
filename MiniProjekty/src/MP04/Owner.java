@@ -12,8 +12,6 @@ public class Owner extends Person {
     }
 
     public Owner(Person person){
-        name = person.name;
-        surname = person.surname;
         this.person = person;
     }
 

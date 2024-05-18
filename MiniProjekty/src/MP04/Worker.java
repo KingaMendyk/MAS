@@ -1,8 +1,11 @@
 package MP04;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 public class Worker extends Person {
-    private int id;
-    private static int latestId;
+    private int id; //Ograniczenie {unique}
+    private static Set<Integer> allIds = new TreeSet<Integer>();
     private Hotel hotel; //Asocjacja kwalifikowana
     private int salary;
     private int workHours; //Ograniczenie statyczne atrybutu
@@ -13,15 +16,10 @@ public class Worker extends Person {
 
     public Worker(int id, String name, String surname) {
         super(name, surname, PersonType.Worker);
-        this.id = id;
-        latestId = id;
+        setId(id);
     }
 
     public Worker(Person person){
-        name = person.name;
-        surname = person.surname;
-        this.id = Worker.getLatestId() + 1;
-        latestId = id;
         this.person = person;
     }
 
@@ -43,8 +41,19 @@ public class Worker extends Person {
         return id;
     }
 
+    public void setId(int id){
+        if(allIds.contains(id)){
+            System.out.println("Id must be unique!");
+            id = getLatestId() + 1;
+            System.out.println("Id has been changed to " + id);
+            //return;
+        }
+        this.id = id;
+        allIds.add(id);
+    }
+
     public static int getLatestId(){
-        return latestId;
+        return Integer.parseInt(allIds.toArray()[allIds.size()-1].toString());
     }
 
     public Hotel getHotel(){

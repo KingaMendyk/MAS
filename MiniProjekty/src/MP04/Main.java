@@ -11,27 +11,8 @@ public class Main {
         Animal fish = new Fish("Nemo", 2);
         Animal frog = new Frog("Robal", 4);
 
-        for (Animal animal : Animal.getAllAnimals()) {
-            animal.feed();
-            System.out.println(animal.getName() + " food amount: " + animal.getFoodAmount());
-        }
-        System.out.println();
-
-        //overlapping
-        //dynamic
-        Person person1 = new Person("Adam", "Adamski", PersonType.Worker);
-        System.out.println(person1);
-        person1.becomeOwner();
-        System.out.println(person1);
-        person1.stopBeingWorker();
-        System.out.println(person1);
-
-        //wieloaspektowe
-
-
-        //wielodziedziczenie
-        System.out.println(cat.getAnimalType().getRoomSize());
-        System.out.println(fish.getAnimalType().getRoomSize());
-        System.out.println(frog.getAnimalType().getRoomSize());
+        Worker w = new Worker(1, "A", "B");
+        Worker w1 = new Worker(1, "A", "B");
+        System.out.println(Worker.getLatestId());
     }
 }
