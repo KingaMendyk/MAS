@@ -41,7 +41,7 @@ public class Worker extends Person {
         return id;
     }
 
-    public void setId(int id){
+    public void setId(int id){ //Ograniczenie {unique}
         if(allIds.contains(id)){
             System.out.println("Id must be unique!");
             id = getLatestId() + 1;
