@@ -24,7 +24,7 @@ public abstract class Animal implements Serializable {
 
     private Room room;
 
-    protected double foodAmount;
+    protected double foodEaten;
     public Animal(String name) {
         this.name = name;
         birthDate = LocalDate.now();
@@ -63,10 +63,16 @@ public abstract class Animal implements Serializable {
         addAnimal(this);
     }
 
-    public abstract void feed();
+    public void feed(double foodAmount){
+        if(foodAmount > getWeight()){
+            System.out.println("Cannot feed this much food to animal!");
+            return;
+        }
+        foodEaten += foodAmount;
+    }
 
-    public double getFoodAmount() {
-        return foodAmount;
+    public double getFoodEaten() {
+        return foodEaten;
     }
 
     private static void addAnimal(Animal animal) {

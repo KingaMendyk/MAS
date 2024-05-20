@@ -14,8 +14,4 @@ public class Frog extends Animal {
         super.setAnimalType(new WaterLandAnimal(this));
     }
 
-    @Override
-    public void feed() {
-        foodAmount = 4;
-    }
 }

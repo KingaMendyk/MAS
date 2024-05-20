@@ -14,11 +14,4 @@ public class Parrot extends Animal {
         super.setAnimalType(new FlyingAnimal(this));
     }
 
-    @Override
-    public void feed() {
-        if(getWeight() > 5)
-            foodAmount = 3;
-        else
-            foodAmount = 5;
-    }
 }

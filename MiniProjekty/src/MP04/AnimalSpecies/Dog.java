@@ -12,12 +12,4 @@ public class Dog extends Animal {
         super(name, weight);
         super.setAnimalType(new LandAnimal(this));
     }
-
-    @Override
-    public void feed() {
-        if(getWeight() > 15)
-            foodAmount = 10;
-        else
-            foodAmount = 5;
-    }
 }

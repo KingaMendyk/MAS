@@ -13,8 +13,4 @@ public class Fish extends Animal {
         super.setAnimalType(new WaterAnimal(this));
     }
 
-    @Override
-    public void feed() {
-        foodAmount = 5;
-    }
 }
