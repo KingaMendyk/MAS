@@ -9,8 +9,8 @@ public class Worker extends Person {
     protected Hotel hotel; //Asocjacja kwalifikowana
     protected int salary;
     protected int workHours; //Ograniczenie statyczne atrybutu
-    private static int maxWorkHours;
-    private static int minWorHours;
+    private static int maxWorkHours = 8;
+    private static int minWorHours = 4;
     private Person person;
     private StaffWorker staffWorker;
     private HotelManager hotelManager;
