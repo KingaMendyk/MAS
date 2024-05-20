@@ -7,8 +7,8 @@ public class Wymagania {
         ? Unique -> id Worker
         - Subset ->
         + Ordered -> lista zwierząt właściciela w kolejności dodania
-        - Bag -> kilka hoteli podlega pod jednego managera
+        ? Bag -> Animal - Room
         + Xor -> worker jest albo menadzerem, albo zwykłym pracownikiem
-        - Ograniczenie Własne ->
+        + Ograniczenie Własne -> nie można karmić zwierzęcia większą ilością jedzenia niż jego waga
      */
 }
