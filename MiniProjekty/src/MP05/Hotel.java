@@ -1,9 +1,12 @@
 package MP05;
 
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.*;
 
+@Entity(name = "Hotel")
 public class Hotel implements Serializable {
     private static List<Hotel> allHotels = new ArrayList<>();
 
@@ -11,10 +14,16 @@ public class Hotel implements Serializable {
     private List<Room> rooms = new ArrayList<>();
     private static Set<Room> allRooms = new HashSet<>(); //Kompozycja
     private Map<Integer, Worker> workers = new TreeMap<>(); //Asocjacja kwalifikowana
+    @Id
+    private Long id;
 
     public Hotel(String name){
         this.name = name;
         addHotel(this);
+    }
+
+    public Hotel() {
+
     }
 
     private void addHotel(Hotel hotel){
@@ -87,5 +96,13 @@ public class Hotel implements Serializable {
         }
 
         return "Hotel " + name + "\nRooms:\n" + roomString;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

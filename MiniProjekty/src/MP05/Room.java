@@ -1,10 +1,15 @@
 package MP05;
 
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Entity(name = "Room")
 public class Room {
+    @Id
     private int id;
     private int number;
     private int size;
@@ -16,6 +21,10 @@ public class Room {
         this.number = number;
         this.size = size;
         this.hotel = hotel;
+    }
+
+    public Room() {
+
     }
 
     //Kompozycja
@@ -56,5 +65,13 @@ public class Room {
     @Override
     public String toString() {
         return "Room { " + "id: " + id + ", number: " + number + ", size: " + size + " }";
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

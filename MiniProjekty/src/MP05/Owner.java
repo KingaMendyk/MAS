@@ -1,8 +1,11 @@
 package MP05;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Entity(name = "Owner")
 public class Owner extends Person {
     private List<Animal> animals = new ArrayList<Animal>(); //Asocjacja zwykła
     private Person person;
@@ -15,6 +18,10 @@ public class Owner extends Person {
         name = person.name;
         surname = person.surname;
         this.person = person;
+    }
+
+    public Owner() {
+
     }
 
     public void addAnimal(Animal animal){

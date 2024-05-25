@@ -1,12 +1,16 @@
 package MP05;
 
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Entity(name = "Animal")
 public abstract class Animal implements Serializable {
     private static List<Animal> allAnimals = new ArrayList<>(); //Ekstensja
 
@@ -20,6 +24,9 @@ public abstract class Animal implements Serializable {
     private Room room;
 
     protected double foodAmount;
+    @Id
+    private Long id;
+
     public Animal(String name) {
         this.name = name;
         birthDate = LocalDate.now();
@@ -43,6 +50,10 @@ public abstract class Animal implements Serializable {
         birthDate = LocalDate.now();
         this.weight = weight;
         addAnimal(this);
+    }
+
+    public Animal() {
+
     }
 
     public abstract void feed();
@@ -189,5 +200,13 @@ public abstract class Animal implements Serializable {
         } catch(ClassNotFoundException ex) {
             System.out.println("Class not found");
         }
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

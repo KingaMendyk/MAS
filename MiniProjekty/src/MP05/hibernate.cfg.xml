@@ -37,10 +37,12 @@
         <property name="hibernate.generate_statistics">false</property>
 
         <!-- Full names the annotated entity class -->
-        <mapping class="Person"/>
-        <mapping class="Owner"/>
-        <mapping class="Worker"/>
-        <mapping class="Animal"/>
+        <mapping class="MP05.Person"/>
+        <mapping class="MP05.Owner"/>
+        <mapping class="MP05.Worker"/>
+        <mapping class="MP05.Animal"/>
+        <mapping class="MP05.Hotel"/>
+        <mapping class="MP05.Room"/>
 
 
     </session-factory>

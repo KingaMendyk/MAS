@@ -1,6 +1,9 @@
 package MP05;
 
 
+import javax.persistence.Entity;
+
+@Entity(name = "Worker")
 public class Worker extends Person {
     private int id;
     private static int latestId;
@@ -22,6 +25,10 @@ public class Worker extends Person {
         this.person = person;
     }
 
+    public Worker() {
+
+    }
+
     public void addHotel(Hotel hotel){
         if(this.hotel == null){
             this.hotel = hotel;
@@ -36,7 +43,11 @@ public class Worker extends Person {
         }
     }
 
-    public int getId(){
+    public void setId(int newId){
+        this.id = newId;
+    }
+
+    public int getWorkerId(){
         return id;
     }
 

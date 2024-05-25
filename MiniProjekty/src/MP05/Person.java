@@ -1,7 +1,11 @@
 package MP05;
 
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 
+@Entity(name = "Person")
 public class Person implements Serializable {
     protected String name;
     protected String surname;
@@ -10,6 +14,8 @@ public class Person implements Serializable {
     private Owner owner;
     private Worker worker;
     private PersonType personType;
+    @Id
+    private Long id;
 
     public Person(){
 
@@ -114,5 +120,13 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return getInfo();
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
