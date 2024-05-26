@@ -1,9 +1,6 @@
 package MP05;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +39,7 @@ public class Owner extends Person {
         }
     }
 
-    @ElementCollection
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Animal> getAnimals(){
         return animals;
     }

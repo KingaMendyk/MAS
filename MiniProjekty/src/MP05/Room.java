@@ -1,10 +1,7 @@
 package MP05;
 
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +59,7 @@ public class Room {
         return animalInRoom;
     }
 
+    @ManyToOne
     public Hotel getHotel(){
         return hotel;
     }

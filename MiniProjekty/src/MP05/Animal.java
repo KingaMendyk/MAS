@@ -135,7 +135,7 @@ public abstract class Animal implements Serializable {
         return getAge() >= minSeniorAge;
     }
 
-    @Embedded
+    @ManyToOne
     public Owner getOwner() {
         return owner;
     }

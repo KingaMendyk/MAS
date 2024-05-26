@@ -3,6 +3,7 @@ package MP05;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity(name = "Worker")
 @Embeddable
@@ -49,6 +50,7 @@ public class Worker extends Person {
         return latestId;
     }
 
+    @ManyToOne
     public Hotel getHotel(){
         return hotel;
     }

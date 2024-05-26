@@ -1,10 +1,7 @@
 package MP05;
 
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
@@ -61,7 +58,7 @@ public class Hotel implements Serializable {
         }
     }
 
-    public Worker findWorker(int id) {
+    public Worker findWorker(long id) {
         if(!workers.containsKey(id)) {
             System.out.println("Can't find worker with id: " + id + " in hotel " + name);
             return null;
@@ -76,7 +73,7 @@ public class Hotel implements Serializable {
         }
     }
 
-    @ElementCollection
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
     public Map<Long, Worker> getWorkers(){
         return workers;
     }
@@ -86,7 +83,7 @@ public class Hotel implements Serializable {
         return name;
     }
 
-    @ElementCollection
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Room> getRooms(){
         return rooms;
     }
