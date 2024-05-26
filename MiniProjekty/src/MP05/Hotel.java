@@ -1,19 +1,24 @@
 package MP05;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
-@Entity(name = "MP05.Hotel")
+@Entity(name = "Hotel")
 public class Hotel implements Serializable {
     private static List<Hotel> allHotels = new ArrayList<>();
 
     private String name;
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Room> rooms = new ArrayList<>();
+
     private static Set<Room> allRooms = new HashSet<>(); //Kompozycja
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
     private Map<Long, Worker> workers = new TreeMap<>(); //Asocjacja kwalifikowana
-    @Id
+
     private Long id;
 
     public Hotel() {
@@ -99,10 +104,40 @@ public class Hotel implements Serializable {
         return "Hotel " + name + "\nRooms:\n" + roomString;
     }
 
+    public static List<Hotel> getAllHotels() {
+        return allHotels;
+    }
+
+    public static void setAllHotels(List<Hotel> allHotels) {
+        Hotel.allHotels = allHotels;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    public static Set<Room> getAllRooms() {
+        return allRooms;
+    }
+
+    public static void setAllRooms(Set<Room> allRooms) {
+        Hotel.allRooms = allRooms;
+    }
+
+    public void setWorkers(Map<Long, Worker> workers) {
+        this.workers = workers;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
-
+    @Id
+    @GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
     public Long getId() {
         return id;
     }

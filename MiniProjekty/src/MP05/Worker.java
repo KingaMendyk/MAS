@@ -1,20 +1,20 @@
 package MP05;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import org.hibernate.annotations.GenericGenerator;
 
-@Entity(name = "MP05.Worker")
+import javax.persistence.*;
+
+@Entity(name = "Worker")
 public class Worker {
-    @Id
     private Long id;
     private static long latestId;
     private String name;
     private String surname;
+    @ManyToOne
     private Hotel hotel; //Asocjacja kwalifikowana
     private int salary;
+    @OneToOne
     private Person person;
 
     public Worker() {
@@ -67,8 +67,24 @@ public class Worker {
         this.person = person;
     }
 
-    public String getInfo(){
-        return "Worker " + name + " " + surname + ", id: " + id + ", hotel: " + (hotel == null ? "no hotel" : hotel.getName());
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     public String getName(){
@@ -84,6 +100,8 @@ public class Worker {
     }
 
     @Id
+    @GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
     public Long getId() {
         return id;
     }

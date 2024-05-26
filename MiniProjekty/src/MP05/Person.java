@@ -1,18 +1,21 @@
 package MP05;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity(name = "MP05.Person")
+@Entity(name = "Person")
 public class Person implements Serializable {
     protected String name;
     protected String surname;
+    @OneToOne
     private Owner owner;
+    @OneToOne
     private Worker worker;
 
     private PersonType personType;
-    @Id
     private Long id;
 
     public Person(){
@@ -23,15 +26,6 @@ public class Person implements Serializable {
         this.name = name;
         this.surname = surname;
         this.personType = type;
-
-        switch(type){
-            case Owner -> owner = new Owner(this);
-            case Worker -> worker = new Worker(this);
-            case Owner_Worker -> {
-                owner = new Owner(this);
-                worker = new Worker(this);
-            }
-        }
     }
 
     public void becomeOwner(){
@@ -76,9 +70,13 @@ public class Person implements Serializable {
             }
         }
     }
+
+    @Transient
     public boolean isOwner(){
         return this.owner != null;
     }
+
+    @Transient
     public boolean isWorker(){
         return this.worker != null;
     }
@@ -92,6 +90,9 @@ public class Person implements Serializable {
 
     @Enumerated
     public PersonType getType(){return personType;}
+    public void setType(PersonType personType){
+        this.personType = personType;
+    }
     @OneToOne
     public Owner getOwner(){
         return owner;
@@ -116,34 +117,15 @@ public class Person implements Serializable {
     public void setSurname(String surname){
         this.surname = surname;
     }
-    public String getInfo(){
-        switch(personType){
-            case Owner -> {
-                return owner.getInfo();
-            }
-            case Worker -> {
-                return worker.getInfo();
-            }
-            case Owner_Worker -> {
-                return "Worker and Owner: " +
-                        owner.getInfo() + " " +
-                        worker.getInfo();
-            }
-            default -> {
-                return name + " " + surname;
-            }
-        }
-    }
 
-    @Override
-    public String toString() {
-        return getInfo();
-    }
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Id
+    @GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
     public Long getId() {
         return id;
     }

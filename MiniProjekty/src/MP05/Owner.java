@@ -1,13 +1,17 @@
 package MP05;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity(name = "MP05.Owner")
+@Entity(name = "Owner")
 public class Owner {
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Animal> animals = new ArrayList<Animal>(); //Asocjacja zwykła
+    @OneToOne
     private Person person;
     private Long id;
     private String name;
@@ -56,15 +60,16 @@ public class Owner {
     }
 
 
-    public String getInfo(){
-        StringBuilder animalString = new StringBuilder();
-        if(animals.size() > 0) {
-            for (Animal animal : animals) {
-                animalString.append(animal).append(", ");
-            }
-            animalString.deleteCharAt(animalString.length() - 1);
-        }
-        return "Owner " + name + " " + surname + ", animals: {" + animalString + "}";
+    public void setAnimals(List<Animal> animals) {
+        this.animals = animals;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getName(){
@@ -80,6 +85,8 @@ public class Owner {
     }
 
     @Id
+    @GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
     public Long getId() {
         return id;
     }

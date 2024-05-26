@@ -3,7 +3,9 @@
   <component name="FacetManager">
     <facet type="hibernate" name="Hibernate">
       <configuration>
-        <datasource-map />
+        <datasource-map>
+          <unit-entry name="MP05:hibernate.cfg.xml" value="43dd96b8-0158-4cd0-8461-2a7aeaf99505" />
+        </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/MP05/hibernate.cfg.xml" />
       </configuration>
@@ -18,5 +20,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="hibernate.core" level="project" />
     <orderEntry type="library" name="h2database.h2" level="project" />
+    <orderEntry type="library" name="javassist" level="project" />
   </component>
 </module>

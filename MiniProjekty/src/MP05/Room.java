@@ -1,18 +1,21 @@
 package MP05;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity(name = "MP05.Room")
+@Entity(name = "Room")
 public class Room {
-    @Id
     private long id;
     private int number;
     private int size;
+    @ManyToOne
     private Hotel hotel; //Kompozycja
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AnimalRoom> animalInRoom = new ArrayList<>(); //Asocjacja z atrybutem
 
     public Room() {
@@ -68,10 +71,36 @@ public class Room {
         return "Room { " + "id: " + id + ", number: " + number + ", size: " + size + " }";
     }
 
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    public void setAnimalInRoom(List<AnimalRoom> animalInRoom) {
+        this.animalInRoom = animalInRoom;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
-
+    @Id
+    @GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
     public Long getId() {
         return id;
     }

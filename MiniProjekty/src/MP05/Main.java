@@ -48,7 +48,6 @@ public class Main {
         Person person = new Person(name, surname, personType);
 
         session.save(person);
-        session.flush();
         session.getTransaction().commit();
         System.out.println("Person added to database");
 

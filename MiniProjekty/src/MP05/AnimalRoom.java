@@ -1,19 +1,20 @@
 package MP05;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "MP05.AnimalRoom")
+@Entity(name = "AnimalRoom")
 public class AnimalRoom { //Atrybut asocjacji
     private LocalDate dateFrom;
     private LocalDate dateTo;
+    @OneToOne
     private Animal animal;
+    @ManyToOne
     private Room room;
 
     private static Set<AnimalRoom> allAnimalRooms = new HashSet<>();
@@ -72,11 +73,45 @@ public class AnimalRoom { //Atrybut asocjacji
         return "Animal " + animal.getName() + " in room " + room + " from: " + dateFrom + " to: " + dateTo;
     }
 
+    public LocalDate getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(LocalDate dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public LocalDate getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(LocalDate dateTo) {
+        this.dateTo = dateTo;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public static Set<AnimalRoom> getAllAnimalRooms() {
+        return allAnimalRooms;
+    }
+
+    public static void setAllAnimalRooms(Set<AnimalRoom> allAnimalRooms) {
+        AnimalRoom.allAnimalRooms = allAnimalRooms;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
     @Id
+    @GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
     public Long getId() {
         return id;
     }

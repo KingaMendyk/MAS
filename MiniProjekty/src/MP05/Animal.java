@@ -1,6 +1,8 @@
 package MP05;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.*;
 import java.time.LocalDate;
@@ -9,21 +11,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity(name = "MP05.Animal")
+@Entity(name = "Animal")
 public class Animal implements Serializable {
     private static List<Animal> allAnimals = new ArrayList<>(); //Ekstensja
 
     private String name;
     private LocalDate birthDate; //Atr. złożony
     private Double weight;  //Atr. opcjonalny
+    @ManyToOne
     private Owner owner; //Atr. złożony //Asocjacja zwykła
     private static double minSeniorAge; //Atr. klasowy
+    @OneToMany
     private List<AnimalRoom> animalInRoom = new ArrayList<>(); //Asocjacja z atrybutem
-
+    @ManyToOne
     private Room room;
 
     protected double foodAmount;
-    @Id
+
     private Long id;
 
     public Animal() {
@@ -67,7 +71,6 @@ public class Animal implements Serializable {
     public void setOwner(Owner owner) {
         if(this.owner == null){
             this.owner = owner;
-            owner.addAnimal(this);
         }
     }
 
@@ -183,37 +186,50 @@ public class Animal implements Serializable {
                 + ", senior: " + (getIsSenior() ? "yes" : "no" )+ ", owners: " + (owner == null ? "no owner" : owner.getName() + " " + owner.getSurname()) + " }";
     }
 
-    //Ekst. - trwałość
-    private static void serializeAll(ObjectOutputStream stream) throws IOException {
-        stream.writeObject(allAnimals);
+
+    public static void setAllAnimals(List<Animal> allAnimals) {
+        Animal.allAnimals = allAnimals;
     }
 
-    private static void deserializeAll(ObjectInputStream stream) throws IOException, ClassNotFoundException {
-        allAnimals = (ArrayList<Animal>) stream.readObject();
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public static void saveToFile(String fileName){
-        try {
-            serializeAll(new ObjectOutputStream(new FileOutputStream(fileName)));
-        } catch(IOException ex){
-            System.out.println("Error while saving to file");
-        }
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public static void readFromFile(String fileName){
-        try {
-            deserializeAll(new ObjectInputStream(new FileInputStream(fileName)));
-        } catch(IOException ex) {
-            System.out.println("Error while reading from file");
-        } catch(ClassNotFoundException ex) {
-            System.out.println("Class not found");
-        }
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    public static double getMinSeniorAge() {
+        return minSeniorAge;
+    }
+
+    public void setAnimalInRoom(List<AnimalRoom> animalInRoom) {
+        this.animalInRoom = animalInRoom;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public void setFoodAmount(double foodAmount) {
+        this.foodAmount = foodAmount;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Id
+    @GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
     public Long getId() {
         return id;
     }
