@@ -1,14 +1,22 @@
 package MP05;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity(name = "Owner")
+@Embeddable
 public class Owner extends Person {
     private List<Animal> animals = new ArrayList<Animal>(); //Asocjacja zwykła
     private Person person;
+
+    public Owner() {
+
+    }
 
     public Owner(String name, String surname){
         super(name, surname, PersonType.Owner);
@@ -18,10 +26,6 @@ public class Owner extends Person {
         name = person.name;
         surname = person.surname;
         this.person = person;
-    }
-
-    public Owner() {
-
     }
 
     public void addAnimal(Animal animal){
@@ -38,10 +42,12 @@ public class Owner extends Person {
         }
     }
 
+    @ElementCollection
     public List<Animal> getAnimals(){
         return animals;
     }
 
+    @Embedded
     public Person getPerson() {
         return person;
     }

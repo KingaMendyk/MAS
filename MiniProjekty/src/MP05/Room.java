@@ -1,6 +1,8 @@
 package MP05;
 
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.ArrayList;
@@ -8,23 +10,24 @@ import java.util.List;
 
 
 @Entity(name = "Room")
+@Embeddable
 public class Room {
     @Id
-    private int id;
+    private long id;
     private int number;
     private int size;
     private Hotel hotel; //Kompozycja
     private List<AnimalRoom> animalInRoom = new ArrayList<>(); //Asocjacja z atrybutem
+
+    public Room() {
+
+    }
 
     private Room(Hotel hotel, int id, int number, int size){
         this.id = id;
         this.number = number;
         this.size = size;
         this.hotel = hotel;
-    }
-
-    public Room() {
-
     }
 
     //Kompozycja
@@ -54,6 +57,7 @@ public class Room {
         }
     }
 
+    @ElementCollection
     public List<AnimalRoom> getAnimalInRoom(){
         return animalInRoom;
     }

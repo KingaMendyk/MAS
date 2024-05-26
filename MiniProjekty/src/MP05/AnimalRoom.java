@@ -1,10 +1,12 @@
 package MP05;
 
 
+import javax.persistence.Embeddable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+@Embeddable
 public class AnimalRoom { //Atrybut asocjacji
     private LocalDate dateFrom;
     private LocalDate dateTo;
@@ -12,6 +14,10 @@ public class AnimalRoom { //Atrybut asocjacji
     private Room room;
 
     private static Set<AnimalRoom> allAnimalRooms = new HashSet<>();
+
+    public AnimalRoom() {
+
+    }
 
     public AnimalRoom(Animal animal, Room room, String dateFrom, String dateTo){
         this.animal = animal;

@@ -1,8 +1,7 @@
 package MP05;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -11,6 +10,7 @@ import java.util.List;
 
 
 @Entity(name = "Animal")
+@Embeddable
 public abstract class Animal implements Serializable {
     private static List<Animal> allAnimals = new ArrayList<>(); //Ekstensja
 
@@ -26,6 +26,10 @@ public abstract class Animal implements Serializable {
     protected double foodAmount;
     @Id
     private Long id;
+
+    public Animal() {
+
+    }
 
     public Animal(String name) {
         this.name = name;
@@ -50,10 +54,6 @@ public abstract class Animal implements Serializable {
         birthDate = LocalDate.now();
         this.weight = weight;
         addAnimal(this);
-    }
-
-    public Animal() {
-
     }
 
     public abstract void feed();
@@ -94,6 +94,7 @@ public abstract class Animal implements Serializable {
         }
     }
 
+    @ElementCollection
     public List<AnimalRoom> getAnimalInRoom(){
         return animalInRoom;
     }
@@ -106,11 +107,13 @@ public abstract class Animal implements Serializable {
         return weight;
     }
 
+    @Transient
     public int getAge() { //Atr. pochodny
         int age = (int) ChronoUnit.YEARS.between(birthDate, LocalDate.now());
         return age;
     }
 
+    @Transient
     public int getAge(String param){ //Przeciążenie
         switch (param) {
             case "months" -> {
@@ -127,10 +130,12 @@ public abstract class Animal implements Serializable {
         }
     }
 
+    @Transient
     public boolean getIsSenior(){ //Atr. pochodny
         return getAge() >= minSeniorAge;
     }
 
+    @Embedded
     public Owner getOwner() {
         return owner;
     }
