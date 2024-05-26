@@ -1,12 +1,15 @@
 package MP05;
 
 
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-@Embeddable
+@Entity(name = "MP05.AnimalRoom")
 public class AnimalRoom { //Atrybut asocjacji
     private LocalDate dateFrom;
     private LocalDate dateTo;
@@ -14,6 +17,7 @@ public class AnimalRoom { //Atrybut asocjacji
     private Room room;
 
     private static Set<AnimalRoom> allAnimalRooms = new HashSet<>();
+    private Long id;
 
     public AnimalRoom() {
 
@@ -53,10 +57,12 @@ public class AnimalRoom { //Atrybut asocjacji
         }
     }
 
-    public Animal getanimal(){
+    @OneToOne
+    public Animal getAnimal(){
         return animal;
     }
 
+    @ManyToOne
     public Room getRoom(){
         return room;
     }
@@ -66,4 +72,12 @@ public class AnimalRoom { //Atrybut asocjacji
         return "Animal " + animal.getName() + " in room " + room + " from: " + dateFrom + " to: " + dateTo;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Id
+    public Long getId() {
+        return id;
+    }
 }

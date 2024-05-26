@@ -8,6 +8,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+        HibernateDB hdb = new HibernateDB();
         Animal animal1, animal2;
         animal1 = createAnimal("Mruczek");
         animal2 = createAnimal("Burek");

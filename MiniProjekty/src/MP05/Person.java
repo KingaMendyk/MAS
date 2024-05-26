@@ -4,13 +4,10 @@ package MP05;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity(name = "Person")
-@Embeddable
+@Entity(name = "MP05.Person")
 public class Person implements Serializable {
     protected String name;
     protected String surname;
-
-    // Dziedziczenie overlapping za pomoca kompozycji
     private Owner owner;
     private Worker worker;
 
@@ -95,6 +92,23 @@ public class Person implements Serializable {
 
     @Enumerated
     public PersonType getType(){return personType;}
+    
+    public Owner getOwner(){
+        return owner;
+    }
+
+    public void setOwner(Owner owner){
+        this.owner = owner;
+    }
+
+    @OneToOne
+    public Worker getWorker(){
+        return worker;
+    }
+
+    public void setWorker(Worker worker){
+        this.worker = worker;
+    }
 
     public String getSurname(){
         return this.surname;

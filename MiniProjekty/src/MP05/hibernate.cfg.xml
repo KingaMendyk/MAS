@@ -15,11 +15,12 @@
 
         <!-- Database connection settings -->
         <property name="connection.driver_class">org.h2.Driver</property>
-        <property name="connection.url">jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE</property>
+        <property name="connection.url">jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1</property>
         <!--<property name="connection.url">jdbc:h2:~/db-test.h2</property>-->
         <!--<property name="connection.url">jdbc:h2:tcp://localhost/~/db-test.h2</property>-->
         <property name="connection.username">sa</property>
         <property name="connection.password"></property>
+        <property name="hibernate.current_session_context_class">thread</property>
 
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>
@@ -43,6 +44,7 @@
         <mapping class="MP05.Animal"/>
         <mapping class="MP05.Hotel"/>
         <mapping class="MP05.Room"/>
+        <mapping class="MP05.AnimalRoom"/>
 
 
     </session-factory>

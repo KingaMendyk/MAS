@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity(name = "Animal")
-@Embeddable
+@Entity(name = "MP05.Animal")
 public class Animal implements Serializable {
     private static List<Animal> allAnimals = new ArrayList<>(); //Ekstensja
 
@@ -93,7 +92,7 @@ public class Animal implements Serializable {
         }
     }
 
-    @ElementCollection
+    @OneToMany
     public List<AnimalRoom> getAnimalInRoom(){
         return animalInRoom;
     }
@@ -137,6 +136,11 @@ public class Animal implements Serializable {
     @ManyToOne
     public Owner getOwner() {
         return owner;
+    }
+
+    @ManyToOne
+    public Room getRoom(){
+        return room;
     }
 
 

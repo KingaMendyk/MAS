@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity(name = "Room")
-@Embeddable
+@Entity(name = "MP05.Room")
 public class Room {
     @Id
     private long id;
@@ -54,7 +53,7 @@ public class Room {
         }
     }
 
-    @ElementCollection
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<AnimalRoom> getAnimalInRoom(){
         return animalInRoom;
     }

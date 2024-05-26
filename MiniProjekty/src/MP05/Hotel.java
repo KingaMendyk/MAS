@@ -5,8 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
-@Entity(name = "Hotel")
-@Embeddable
+@Entity(name = "MP05.Hotel")
 public class Hotel implements Serializable {
     private static List<Hotel> allHotels = new ArrayList<>();
 

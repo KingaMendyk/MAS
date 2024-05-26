@@ -5,18 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity(name = "Owner")
-@Embeddable
-public class Owner extends Person {
+@Entity(name = "MP05.Owner")
+public class Owner {
     private List<Animal> animals = new ArrayList<Animal>(); //Asocjacja zwykła
     private Person person;
+    private Long id;
+    private String name;
+    private String surname;
 
     public Owner() {
 
     }
 
     public Owner(String name, String surname){
-        super(name, surname, PersonType.Owner);
+        new Owner(new Person(name, surname, PersonType.Owner));
     }
 
     public Owner(Person person){
@@ -44,7 +46,7 @@ public class Owner extends Person {
         return animals;
     }
 
-    @Embedded
+    @OneToOne
     public Person getPerson() {
         return person;
     }
@@ -53,7 +55,7 @@ public class Owner extends Person {
         this.person = person;
     }
 
-    @Override
+
     public String getInfo(){
         StringBuilder animalString = new StringBuilder();
         if(animals.size() > 0) {
@@ -63,5 +65,22 @@ public class Owner extends Person {
             animalString.deleteCharAt(animalString.length() - 1);
         }
         return "Owner " + name + " " + surname + ", animals: {" + animalString + "}";
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public String getSurname(){
+        return surname;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Id
+    public Long getId() {
+        return id;
     }
 }

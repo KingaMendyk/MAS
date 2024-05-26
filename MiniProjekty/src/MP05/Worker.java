@@ -1,15 +1,18 @@
 package MP05;
 
 
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
-@Entity(name = "Worker")
-@Embeddable
-public class Worker extends Person {
-    private int id;
-    private static int latestId;
+@Entity(name = "MP05.Worker")
+public class Worker {
+    @Id
+    private Long id;
+    private static long latestId;
+    private String name;
+    private String surname;
     private Hotel hotel; //Asocjacja kwalifikowana
     private int salary;
     private Person person;
@@ -18,8 +21,8 @@ public class Worker extends Person {
 
     }
 
-    public Worker(int id, String name, String surname) {
-        super(name, surname, PersonType.Worker);
+    public Worker(long id, String name, String surname) {
+        new Worker(new Person(name, surname, PersonType.Worker));
         this.id = id;
         latestId = id;
     }
@@ -46,7 +49,7 @@ public class Worker extends Person {
         }
     }
 
-    public static int getLatestId(){
+    public static long getLatestId(){
         return latestId;
     }
 
@@ -55,6 +58,7 @@ public class Worker extends Person {
         return hotel;
     }
 
+    @OneToOne
     public Person getPerson() {
         return person;
     }
@@ -63,8 +67,24 @@ public class Worker extends Person {
         this.person = person;
     }
 
-    @Override
     public String getInfo(){
         return "Worker " + name + " " + surname + ", id: " + id + ", hotel: " + (hotel == null ? "no hotel" : hotel.getName());
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public String getSurname(){
+        return surname;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Id
+    public Long getId() {
+        return id;
     }
 }
