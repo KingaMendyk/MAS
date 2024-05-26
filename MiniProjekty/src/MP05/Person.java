@@ -92,7 +92,7 @@ public class Person implements Serializable {
 
     @Enumerated
     public PersonType getType(){return personType;}
-    
+    @OneToOne
     public Owner getOwner(){
         return owner;
     }
