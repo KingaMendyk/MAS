@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity(name = "Animal")
 @Embeddable
-public abstract class Animal implements Serializable {
+public class Animal implements Serializable {
     private static List<Animal> allAnimals = new ArrayList<>(); //Ekstensja
 
     private String name;
@@ -56,7 +56,6 @@ public abstract class Animal implements Serializable {
         addAnimal(this);
     }
 
-    public abstract void feed();
 
     public double getFoodAmount() {
         return foodAmount;
