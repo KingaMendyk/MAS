@@ -116,7 +116,6 @@ public class Main {
         Hotel hotel = new Hotel(name);
 
         session.save(hotel);
-        session.flush();
         session.getTransaction().commit();
         System.out.println("Hotel added to database");
 
