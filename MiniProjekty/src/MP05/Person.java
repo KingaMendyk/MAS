@@ -118,6 +118,11 @@ public class Person implements Serializable {
         this.surname = surname;
     }
 
+    @Override
+    public String toString(){
+        return name + " " + surname;
+    }
+
 
     public void setId(Long id) {
         this.id = id;

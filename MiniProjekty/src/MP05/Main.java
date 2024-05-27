@@ -22,6 +22,24 @@ public class Main {
         createWorker( "Cecylia", "Cecylska");
         createHotel("Zwierzakowo");
 
+        Session session = HibernateDB.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        System.out.println("\nAnimals from database:");
+        List<Animal> animalsFromDB = session.createQuery( "from Animal" ).list();
+        for (Animal animal : animalsFromDB) {
+            System.out.println(animal);
+        }
+
+        System.out.println("\nOwners from database:");
+        List<Person> peopleFromDB = session.createQuery( "from Person" ).list();
+        for (Person person : peopleFromDB) {
+            if(person.getType() == PersonType.Owner)
+                System.out.println(person.getOwner());
+        }
+        session.getTransaction().commit();
+        session.close();
+
         HibernateDB.getSessionFactory().close();
     }
 
@@ -63,6 +81,7 @@ public class Main {
 
         Owner owner = new Owner();
         owner.setPerson(person);
+        person.setOwner(owner);
 
         session.save(owner);
         session.getTransaction().commit();
@@ -80,6 +99,7 @@ public class Main {
 
         Owner owner = new Owner();
         owner.setPerson(person);
+        person.setOwner(owner);
         for (Animal animal :animals) {
             owner.addAnimal(animal);
         }
@@ -100,6 +120,7 @@ public class Main {
 
         Worker worker = new Worker();
         worker.setPerson(person);
+        person.setWorker(worker);
 
         session.save(worker);
         session.getTransaction().commit();
