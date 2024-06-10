@@ -8,6 +8,7 @@ import MP04.Room;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 public class GUI {
     private JFrame mainFrame;
@@ -114,10 +115,14 @@ public class GUI {
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.addColumn("Label");
         tableModel.addColumn("Value");
+
+        Dimension dim = new Dimension(50, 2);
+        deailsTable.setIntercellSpacing(dim);
+
         deailsTable.setRowHeight(65);
         deailsTable.setModel(tableModel);
         tableModel.addRow(new Object[]{"Hotel", h1.getName()});
-        tableModel.addRow(new Object[]{"Pokój", h1.getRooms().get(0).getNumber()});
+        tableModel.addRow(new Object[]{"Pokój", h1.getRooms().get(2).getNumber()});
         tableModel.addRow(new Object[]{"Data od", "2024-07-08"});
         tableModel.addRow(new Object[]{"Data do", "2024-07-10"});
         tableModel.addRow(new Object[]{"Zwierzę", Animal.getAllAnimals().get(1).getName()});
@@ -131,6 +136,18 @@ public class GUI {
         roomPanel.setVisible(false);
         animalFormPanel.setVisible(false);
         reservationPanel.setVisible(true);
+
+        cancelButton.addActionListener((l) -> {JOptionPane.showMessageDialog(reservationPanel, "Rezerwacja anulowana");});
+        acceptButton.addActionListener((l) -> {JOptionPane.showMessageDialog(reservationPanel, "Rezerwacja zatwierdzona");});
+
+        dateOkButton.addActionListener((l) -> {JOptionPane.showOptionDialog(datePanel,
+                "Brak wolnych pokoi w podanym terminie. Wybierz inny termin lub anuluj",
+                "Brak dostępnego pokoju",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                new String[]{"Anuluj", "OK"},
+                "default");});
 
 
         mainFrame.setSize(980, 700);
