@@ -191,8 +191,8 @@ public abstract class Animal implements Serializable {
 
     @Override
     public String toString() { //Przesłonięcie
-        return name + " { age: " + getAge() + ", weight: " + (getWeight() == null ? "unknown" : weight)
-                + ", senior: " + (getIsSenior() ? "yes" : "no" )+ ", owners: " + (owner == null ? "no owner" : owner.getName() + " " + owner.getSurname()) + " }";
+        return name + "    Wiek: " + getAge() + "    Waga: " + (getWeight() == null ? "nieznana" : weight)
+                + "    Senior: " + (getIsSenior() ? "tak" : "nie" );
     }
 
     //Ekst. - trwałość

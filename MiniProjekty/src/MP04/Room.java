@@ -52,8 +52,16 @@ public class Room {
         return hotel;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
     @Override
     public String toString() {
-        return "Room { " + "id: " + id + ", number: " + number + ", size: " + size + " }";
+        return "Pokój " + " numer: " + number + "    Wielkość: " + size + "    Wyposażenie: ";
     }
 }

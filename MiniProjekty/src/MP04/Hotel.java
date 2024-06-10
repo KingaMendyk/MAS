@@ -7,12 +7,19 @@ public class Hotel implements Serializable {
     private static List<Hotel> allHotels = new ArrayList<>();
 
     private String name;
+    private String address;
     private List<Room> rooms = new ArrayList<>();
     private static Set<Room> allRooms = new HashSet<>(); //Kompozycja
     private Map<Integer, Worker> workers = new TreeMap<>(); //Asocjacja kwalifikowana
 
     public Hotel(String name){
         this.name = name;
+        addHotel(this);
+    }
+
+    public Hotel(String name, String address){
+        this.name = name;
+        this.address = address;
         addHotel(this);
     }
 
@@ -85,6 +92,6 @@ public class Hotel implements Serializable {
             }
         }
 
-        return "Hotel " + name + "\nRooms:\n" + roomString;
+        return "Hotel " + name + "    Adres: " + address + "    Liczba pokoi: " + rooms.size() + "0";
     }
 }
