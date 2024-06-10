@@ -73,6 +73,13 @@ public class GUI {
     private JPanel calendarPanel;
     private JLabel typeLabel;
     private JComboBox typeComboBox;
+    private JLabel titleLabel;
+    private JLabel reservationTitleLabel;
+    private JLabel animalFormTitleLabel;
+    private JLabel roomTitleLabel;
+    private JLabel dateTitleLabel;
+    private JLabel hotelTitleLabel;
+    private JLabel animalTitleLabel;
 
     public GUI(){
         mainFrame = new JFrame();
@@ -129,13 +136,13 @@ public class GUI {
 
         mainFrame.add(mainPanel);
 
-        mainViewPanel.setVisible(false);
+        mainViewPanel.setVisible(true);
         animalsViewPanel.setVisible(false);
         hotelPanel.setVisible(false);
         datePanel.setVisible(false);
         roomPanel.setVisible(false);
         animalFormPanel.setVisible(false);
-        reservationPanel.setVisible(true);
+        reservationPanel.setVisible(false);
 
         cancelButton.addActionListener((l) -> {JOptionPane.showMessageDialog(reservationPanel, "Rezerwacja anulowana");});
         acceptButton.addActionListener((l) -> {JOptionPane.showMessageDialog(reservationPanel, "Rezerwacja zatwierdzona");});
