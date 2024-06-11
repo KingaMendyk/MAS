@@ -1,0 +1,136 @@
+package AProjektKoncowy;
+
+import AProjektKoncowy.AnimalTypes.AnimalType;
+import AProjektKoncowy.AnimalTypes.LandAnimal;
+import AProjektKoncowy.AnimalTypes.WaterAnimal;
+import AProjektKoncowy.AnimalTypes.WaterLandAnimal;
+import AProjektKoncowy.Enums.AnimalTypeEnum;
+
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Animal {
+    private static List<Animal> allAnimals = new ArrayList<>();
+
+    protected String name;
+    protected LocalDate dateOfBirth;
+    protected Double weight;
+    protected static int minSeniorAge;
+
+    private AnimalType animalType;
+
+    private AnimalOwner owner;
+    private List<AnimalInRoom> animalInRoom = new ArrayList<>();
+
+    public Animal(String name, String dateOfBirth){
+        this.name = name;
+        this.dateOfBirth = LocalDate.parse(dateOfBirth);
+        addAnimal(this);
+    }
+
+    public Animal(String name, String dateOfBirth, Double weight){
+        this.name = name;
+        this.dateOfBirth = LocalDate.parse(dateOfBirth);
+        this.weight = weight;
+        addAnimal(this);
+    }
+
+    public Animal(String name, AnimalTypeEnum animalType) {
+        this.name = name;
+        dateOfBirth = LocalDate.now();
+        addAnimal(this);
+        switch (animalType) {
+            case Land -> this.animalType = new LandAnimal(this);
+            case Water -> this.animalType = new WaterAnimal(this);
+            case WaterLand -> this.animalType = new WaterLandAnimal(this);
+            default -> this.animalType = null;
+        }
+    }
+
+    private static void addAnimal(Animal animal) {
+        allAnimals.add(animal);
+    }
+
+    public void setOwner(AnimalOwner owner) {
+        if(this.owner == null){
+            this.owner = owner;
+            owner.addAnimal(this);
+        }
+    }
+
+    public void removeOwner(){
+        if(owner != null){
+            owner.removeAnimal(this);
+            owner = null;
+        }
+    }
+
+    public void addAnimalInRoom(AnimalInRoom animalRoom)
+    {
+        if(!animalInRoom.contains(animalRoom)) {
+            animalInRoom.add(animalRoom);
+        }
+    }
+    public void removeAnimalInRoom(AnimalInRoom animalRoom){
+        if(animalInRoom.contains(animalRoom)) {
+            animalInRoom.remove(animalRoom);
+            animalRoom.removeAnimal(this);
+        }
+    }
+
+    public int getAge(){
+        return (int) ChronoUnit.YEARS.between(dateOfBirth, LocalDate.now());
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    public static int getMinSeniorAge() {
+        return minSeniorAge;
+    }
+
+    public static void setMinSeniorAge(int minSeniorAge) {
+        Animal.minSeniorAge = minSeniorAge;
+    }
+
+    public boolean isSenior(){
+        return getAge() >= minSeniorAge;
+    }
+
+    public AnimalOwner getOwner() {
+        return owner;
+    }
+
+    public String getInfo(){
+        return this.toString();
+    }
+
+    @Override
+    public String toString(){
+        return name + " wiek: " + getAge() + " waga: " + (getWeight() == null ? "brak" : getWeight());
+    }
+}
