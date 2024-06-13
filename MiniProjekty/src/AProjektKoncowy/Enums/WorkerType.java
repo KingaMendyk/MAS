@@ -1,6 +1,6 @@
 package AProjektKoncowy.Enums;
 
 public enum WorkerType {
-    Staff,
+    StaffWorker,
     Manager
 }

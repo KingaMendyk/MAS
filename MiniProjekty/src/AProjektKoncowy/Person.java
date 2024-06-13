@@ -29,10 +29,10 @@ public abstract class Person {
         this.personType = personType;
         switch(personType){
             case Owner -> owner = new AnimalOwner(this);
-            case Worker -> worker = new Worker(this);
+            case Worker -> worker = new StaffWorker(this);
             case OwnerWorker -> {
                 owner = new AnimalOwner(this);
-                worker = new Worker(this);
+                worker = new StaffWorker(this);
             }
         }
 

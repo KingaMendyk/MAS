@@ -14,6 +14,7 @@ public class Room {
     private Hotel hotel;
 
     private List<AnimalInRoom> animalInRoom = new ArrayList<>();
+    private List<StaffWorker> assignedWorkers;
 
     private Room(Hotel hotel, int number, int size){
         this.number = number;
@@ -44,6 +45,20 @@ public class Room {
             animalInRoom.remove(animalRoom);
             animalRoom.removeRoom(this);
         }
+    }
+
+    public void assignWorker(StaffWorker worker){
+        if(assignedWorkers.contains(worker))
+            return;
+        assignedWorkers.add(worker);
+        worker.assignToRoom(this);
+    }
+
+    public void removeWorker(StaffWorker worker){
+        if(!assignedWorkers.contains(worker))
+            return;
+        assignedWorkers.remove(worker);
+        worker.removeFromRoom(this);
     }
 
     public static List<Room> getAvailableRooms(LocalDate dateFrom, LocalDate dateTo, Hotel hotel){

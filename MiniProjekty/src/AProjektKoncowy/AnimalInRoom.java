@@ -15,7 +15,7 @@ public class AnimalInRoom {
         this.animal = animal;
         this.room = room;
         if(animal.isSenior())
-            healthCheckup = true;
+            this.healthCheckup = true;
 
         animal.addAnimalInRoom(this);
         room.addAnimalInRoom(this);
@@ -25,7 +25,7 @@ public class AnimalInRoom {
         this.animal = animal;
         this.room = room;
         if(animal.isSenior())
-            healthCheckup = true;
+            this.healthCheckup = true;
         else{
             this.healthCheckup = healthCheckup;
         }

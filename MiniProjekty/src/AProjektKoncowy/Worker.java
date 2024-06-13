@@ -26,6 +26,7 @@ public abstract class Worker extends Person{
         name = person.name;
         surname = person.surname;
         this.person = person;
+        this.workerType = WorkerType.StaffWorker;
     }
 
     public void addHotel(Hotel hotel){
