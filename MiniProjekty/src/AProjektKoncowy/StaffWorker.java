@@ -13,16 +13,17 @@ public class StaffWorker extends Worker{
 
     public boolean assignToRoom(Room room){
         if(Arrays.asList(assignedRooms).contains(room)){
-            System.out.println("Room already assigned");
             return false;
         }
 
-        if(roomCount < maxRoomCount){
-            assignedRooms[roomCount++] = room;
-            room.assignWorker(this);
-            return true;
+        if(roomCount >= maxRoomCount){
+            System.out.println("MAx limit reached");
+            return false;
         }
-        return false;
+
+        assignedRooms[roomCount++] = room;
+        room.assignWorker(this);
+        return true;
     }
 
     public void removeFromRoom(Room room){
