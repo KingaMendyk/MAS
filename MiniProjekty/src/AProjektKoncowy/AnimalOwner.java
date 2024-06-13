@@ -7,6 +7,7 @@ import java.util.List;
 
 public class AnimalOwner extends Person {
     private List<Animal> animals = new ArrayList<>();
+    private List<Reservation> reservations = new ArrayList<>();
     private Person person;
 
     public AnimalOwner(String name, String surname){
@@ -33,6 +34,20 @@ public class AnimalOwner extends Person {
 
     public void makeReservation(int roomId, Animal animal){
         //TODO
+    }
+
+    public void addReservation(Reservation reservation){
+        if(reservations.contains(reservation))
+            return;
+        reservations.add(reservation);
+        reservation.addOwner(this);
+    }
+
+    public void removeReservation(Reservation reservation){
+        if(!reservations.contains(reservation))
+            return;
+        reservations.remove(reservation);
+        reservation.removeOwner(this);
     }
 
     public List<Animal> getAnimals(){
