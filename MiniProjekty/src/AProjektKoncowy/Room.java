@@ -10,7 +10,6 @@ public class Room {
     private int number;
     private int size;
     private List<String> eqipment = new ArrayList<>();
-    private boolean isAvailable;
     private Hotel hotel;
 
     private List<AnimalInRoom> animalInRoom = new ArrayList<>();
@@ -33,6 +32,20 @@ public class Room {
         hotel.addRoom(room);
 
         return room;
+    }
+
+    public boolean isAvailable(LocalDate dateFrom, LocalDate dateTo){
+        boolean available = true;
+        for(Reservation reservation : getReservations()){
+            LocalDate resDateFrom = reservation.getDateFrom();
+            LocalDate resDateTo = reservation.getDateTo();
+
+            if (dateFrom.isBefore(resDateFrom) || dateTo.isAfter(resDateTo)) {
+                available = false;
+                break;
+            }
+        }
+        return available;
     }
 
     public void addAnimalInRoom(AnimalInRoom animalRoom){
@@ -76,10 +89,6 @@ public class Room {
         reservation.removeRoom(this);
     }
 
-    public static List<Room> getAvailableRooms(LocalDate dateFrom, LocalDate dateTo, Hotel hotel){
-        return null; //TODO
-    }
-
     public int getRoomNumber() {
         return number;
     }
@@ -104,9 +113,6 @@ public class Room {
         eqipment.add(equipmentPiece);
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
-    }
 
     public Hotel getHotel() {
         return hotel;
@@ -116,8 +122,16 @@ public class Room {
         this.hotel = hotel;
     }
 
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public List<StaffWorker> getAssignedWorkers() {
+        return assignedWorkers;
+    }
+
     @Override
     public String toString() {
-        return "Pokój numer: " + number + (isAvailable ? " dostępny" : " niedostępny");
+        return "Pokój numer: " + number ;
     }
 }

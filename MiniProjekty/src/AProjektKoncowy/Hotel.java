@@ -1,6 +1,7 @@
 package AProjektKoncowy;
 
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class Hotel {
@@ -55,6 +56,15 @@ public class Hotel {
 
     public static List<Hotel> getAllHotels() {
         return allHotels;
+    }
+
+    public List<Room> getAvailableRooms(LocalDate dateFrom, LocalDate dateTo){
+        List<Room> result = new ArrayList<>();
+        for(Room room : rooms){
+            if(room.isAvailable(dateFrom, dateTo))
+                result.add(room);
+        }
+        return result;
     }
 
     public String getName() {

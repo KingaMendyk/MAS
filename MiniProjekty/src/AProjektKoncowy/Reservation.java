@@ -46,6 +46,26 @@ public class Reservation {
         room.removeReservation(this);
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public LocalDate getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(LocalDate dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public LocalDate getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(LocalDate dateTo) {
+        this.dateTo = dateTo;
+    }
+
     public void changeState(ReservationState state){
         this.state = state;
     }

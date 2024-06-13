@@ -53,4 +53,8 @@ public class AnimalOwner extends Person {
     public List<Animal> getAnimals(){
         return animals;
     }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
 }
