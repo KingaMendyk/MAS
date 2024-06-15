@@ -8,6 +8,7 @@ public class HotelManager extends Worker {
 
     public HotelManager(int id, String name, String surname){
         super(id, name, surname, WorkerType.Manager);
+        setManager(this);
     }
 
     public HotelManager(Worker worker){

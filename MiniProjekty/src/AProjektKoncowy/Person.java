@@ -8,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Person {
+public abstract class Person implements Serializable {
     private static List<Person> allPeople = new ArrayList<>();
 
     protected String name;
@@ -28,15 +28,6 @@ public abstract class Person {
         this.name = name;
         this.surname = surname;
         this.personType = personType;
-        switch(personType){
-            case Owner -> owner = new AnimalOwner(this);
-            case Worker -> worker = new StaffWorker(this);
-            case OwnerWorker -> {
-                owner = new AnimalOwner(this);
-                worker = new StaffWorker(this);
-            }
-        }
-
         addPerson(this);
     }
 
@@ -129,9 +120,25 @@ public abstract class Person {
         this.phoneNumber = phoneNumber;
     }
 
+    public AnimalOwner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(AnimalOwner owner) {
+        this.owner = owner;
+    }
+
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
+    }
+
     @Override
     public String toString(){
-        String basicString = name + " " + surname + " (" + personType.toString() + ")";
+        String basicString = name + " " + surname + " ("  + ")";
         String ownerString = "";
         String staffWorkerString = "";
         String managerString = "";

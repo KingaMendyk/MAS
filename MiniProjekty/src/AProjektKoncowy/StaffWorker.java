@@ -12,6 +12,7 @@ public class StaffWorker extends Worker{
 
     public StaffWorker(int id, String name, String surname){
         super(id, name, surname, WorkerType.StaffWorker);
+        setStaffWorker(this);
     }
 
     public StaffWorker(Worker worker){

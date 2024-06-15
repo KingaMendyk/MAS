@@ -5,7 +5,7 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
-public class Hotel {
+public class Hotel implements Serializable {
     private static List<Hotel> allHotels = new ArrayList<>();
     private String name;
     private String address;

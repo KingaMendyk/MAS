@@ -13,6 +13,7 @@ public class AnimalOwner extends Person {
 
     public AnimalOwner(String name, String surname){
         super(name, surname, PersonType.Owner);
+        setOwner(this);
     }
 
     protected AnimalOwner(Person person){

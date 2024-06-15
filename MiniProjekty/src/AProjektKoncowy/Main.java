@@ -3,6 +3,7 @@ package AProjektKoncowy;
 import AProjektKoncowy.AnimalSpecies.Cat;
 import AProjektKoncowy.AnimalSpecies.Dog;
 
+import java.time.LocalDate;
 import java.util.Random;
 
 public class Main {
@@ -83,7 +84,9 @@ public class Main {
         hotel3.addWorker(worker7);
         hotel3.addWorker(worker8);
 
-
+        System.out.println(hotel1.getAvailableRooms(LocalDate.parse("2024-06-19"), LocalDate.parse("2024-06-22")));
+        owner2.makeReservation(hotel1.getRooms().get(0), "2024-06-19", "2024-06-22");
+        System.out.println(hotel1.getAvailableRooms(LocalDate.parse("2024-06-19"), LocalDate.parse("2024-06-22")));
 
     }
 }

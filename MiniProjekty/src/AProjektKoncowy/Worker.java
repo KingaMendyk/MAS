@@ -25,12 +25,9 @@ public abstract class Worker extends Person{
 
     public Worker(int id, String name, String surname, WorkerType workerType){
         super(name, surname, PersonType.Worker);
+        setWorker(this);
         setId(id);
         this.workerType = workerType;
-        switch(workerType){
-            case StaffWorker -> staffWorker = new StaffWorker(this);
-            case Manager -> manager = new HotelManager(this);
-        }
     }
 
     public Worker(Person person, WorkerType workerType){
@@ -118,8 +115,16 @@ public abstract class Worker extends Person{
         return workerType;
     }
 
+    public void setStaffWorker(StaffWorker staffWorker) {
+        this.staffWorker = staffWorker;
+    }
+
     public StaffWorker getStaffWorker() {
         return staffWorker;
+    }
+
+    public void setManager(HotelManager manager) {
+        this.manager = manager;
     }
 
     public HotelManager getManager() {

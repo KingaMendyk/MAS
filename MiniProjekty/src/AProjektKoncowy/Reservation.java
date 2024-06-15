@@ -56,7 +56,11 @@ public class Reservation {
     }
 
     private void setId(){
-        this.id = allIds.get(allIds.size() - 1) + 1;
+        if(allIds.isEmpty())
+            this.id = 0;
+        else
+            this.id = allIds.get(allIds.size() - 1) + 1;
+        allIds.add(id);
     }
 
     public int getId() {
@@ -92,6 +96,18 @@ public class Reservation {
     public void removeAnimal(Animal animal){
         animal.removeAnimalInRoom(animalInRoom);
         room.removeAnimalInRoom(animalInRoom);
+    }
+
+    public ReservationState getState() {
+        return state;
+    }
+
+    public AnimalOwner getAnimalOwner() {
+        return animalOwner;
+    }
+
+    public Room getRoom() {
+        return room;
     }
 
     public void changeState(ReservationState state){

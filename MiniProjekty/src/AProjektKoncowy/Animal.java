@@ -13,7 +13,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Animal {
+public class Animal implements Serializable{
     private static List<Animal> allAnimals = new ArrayList<>();
 
     protected String name;
