@@ -12,4 +12,8 @@ public class Dog extends Animal {
     public Dog(String name, String dateOfBirth, Double weight) {
         super(name, dateOfBirth, weight);
     }
+
+    public boolean isSenior(){
+        return getAge() >= minSeniorAge;
+    }
 }

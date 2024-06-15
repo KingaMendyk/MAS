@@ -9,7 +9,7 @@ import java.util.List;
 public class Room {
     private int number;
     private int size;
-    private List<String> eqipment = new ArrayList<>();
+    private List<String> equipment = new ArrayList<>();
     private Hotel hotel;
 
     private List<AnimalInRoom> animalInRoom = new ArrayList<>();
@@ -105,12 +105,12 @@ public class Room {
         this.size = size;
     }
 
-    public List<String> getEqipment() {
-        return eqipment;
+    public List<String> getEquipment() {
+        return equipment;
     }
 
     public void addRoomEquipment(String equipmentPiece){
-        eqipment.add(equipmentPiece);
+        equipment.add(equipmentPiece);
     }
 
 
@@ -132,6 +132,6 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Pokój numer: " + number ;
+        return "Pokój numer: " + number + " Wyposażenie: " + getEquipment().toString();
     }
 }
