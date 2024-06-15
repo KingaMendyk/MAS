@@ -3,9 +3,12 @@ package AProjektKoncowy;
 import AProjektKoncowy.Enums.ReservationState;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Reservation {
     private int id;
+    private List<Integer> allIds = new ArrayList<>();
     private LocalDate dateFrom;
     private LocalDate dateTo;
     private ReservationState state;
@@ -15,7 +18,7 @@ public class Reservation {
 
 
     public Reservation(){
-
+        setId();
     }
 
     public void addOwner(AnimalOwner owner){
@@ -44,6 +47,10 @@ public class Reservation {
             return;
         this.room = null;
         room.removeReservation(this);
+    }
+
+    private void setId(){
+        this.id = allIds.get(allIds.size() - 1) + 1;
     }
 
     public int getId() {

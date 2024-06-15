@@ -81,6 +81,17 @@ public abstract class Person {
 
     @Override
     public String toString(){
-        return name + " " + surname + "(" + personType.toString() + ")";
+        String basicString = name + " " + surname + " (" + personType.toString() + ")";
+        String ownerString = "";
+        String staffWrkerString = "";
+        String managerString = "";
+
+        switch(personType){
+            case Owner -> ownerString = ", liczba zwierząt: " + owner.getAnimals().size();
+            case Worker ->{
+                //worker.get
+            }
+        }
+        return "";
     }
 }

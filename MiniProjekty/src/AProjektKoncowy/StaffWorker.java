@@ -1,14 +1,25 @@
 package AProjektKoncowy;
 
+import AProjektKoncowy.Enums.WorkerType;
+
 import java.util.Arrays;
 
 public class StaffWorker extends Worker{
     private static int maxRoomCount = 3;
     private Room[] assignedRooms = new Room[maxRoomCount];
     private int roomCount;
+    private Worker worker;
+
+    public StaffWorker(int id, String name, String surname){
+        super(id, name, surname, WorkerType.StaffWorker);
+    }
+
+    public StaffWorker(Worker worker){
+        this.worker = worker;
+    }
 
     public StaffWorker(Person person){
-        super(person);
+        super(person, WorkerType.StaffWorker);
     }
 
     public boolean assignToRoom(Room room){
@@ -17,7 +28,7 @@ public class StaffWorker extends Worker{
         }
 
         if(roomCount >= maxRoomCount){
-            System.out.println("MAx limit reached");
+            System.out.println("Max limit reached");
             return false;
         }
 
