@@ -41,7 +41,29 @@ public abstract class Worker extends Person{
     }
 
     public void becomeManager(){
+        if(!isManager()) {
+            this.manager = new HotelManager(this);
+            this.workerType = WorkerType.Manager;
+        }
+    }
 
+    public void stopBeingManager(){
+        if(isManager()){
+            this.manager.setWorker(null);
+            this.manager = null;
+            workerType = WorkerType.StaffWorker;
+        }
+    }
+
+    public boolean isManager(){
+        return this.manager != null;
+    }
+    public boolean isStaffWorker(){
+        return this.staffWorker != null;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public void addHotel(Hotel hotel){

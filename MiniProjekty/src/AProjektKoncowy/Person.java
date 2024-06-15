@@ -1,6 +1,7 @@
 package AProjektKoncowy;
 
 import AProjektKoncowy.Enums.PersonType;
+import MP03.Owner;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -37,6 +38,55 @@ public abstract class Person {
         }
 
         addPerson(this);
+    }
+
+    public void becomeOwner(){
+        if(!isOwner()) {
+            this.owner = new AnimalOwner(this);
+            if(personType == PersonType.Worker)
+                personType = PersonType.OwnerWorker;
+            else{
+                personType = PersonType.Owner;
+            }
+        }
+    }
+    public void stopBeingOwner(){
+        if(isOwner()) {
+            this.owner.setPerson(null);
+            this.owner = null;
+            if(personType == PersonType.OwnerWorker)
+                personType = PersonType.Worker;
+            else{
+                personType = null;
+            }
+        }
+    }
+    public void becomeWorker(){
+        if(!isWorker()) {
+            this.worker = new StaffWorker(this);
+            if(personType == PersonType.Owner)
+                personType = PersonType.OwnerWorker;
+            else{
+                personType = PersonType.Worker;
+            }
+        }
+    }
+    public void stopBeingWorker(){
+        if(isWorker()){
+            this.worker.setPerson(null);
+            this.worker = null;
+            if(personType == PersonType.OwnerWorker)
+                personType = PersonType.Owner;
+            else{
+                personType = null;
+            }
+        }
+    }
+    public boolean isOwner(){
+        return this.owner != null;
+    }
+    public boolean isWorker(){
+        return this.worker != null;
     }
 
     private void addPerson(Person person){

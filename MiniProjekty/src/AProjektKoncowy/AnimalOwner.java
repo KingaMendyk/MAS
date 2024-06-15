@@ -50,6 +50,10 @@ public class AnimalOwner extends Person {
         reservation.removeOwner(this);
     }
 
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
     public List<Animal> getAnimals(){
         return animals;
     }

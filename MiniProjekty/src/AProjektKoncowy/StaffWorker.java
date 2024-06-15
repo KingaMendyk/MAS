@@ -22,6 +22,14 @@ public class StaffWorker extends Worker{
         super(person, WorkerType.StaffWorker);
     }
 
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
+    }
+
     public boolean assignToRoom(Room room){
         if(Arrays.asList(assignedRooms).contains(room)){
             return false;
