@@ -18,6 +18,12 @@ public class Hotel {
         addHotel(this);
     }
 
+    public Hotel(String name, String address){
+        this.name = name;
+        this.address = address;
+        addHotel(this);
+    }
+
     private void addHotel(Hotel hotel){
         allHotels.add(hotel);
     }
@@ -42,9 +48,11 @@ public class Hotel {
     }
 
     public void addWorker(Worker worker) {
+        if(worker.getHotel() != null)
+            return;
         if(!workers.containsKey(worker.getId())) {
             workers.put(worker.getId(), worker);
-            worker.addHotel(this);
+            worker.setHotel(this);
         }
     }
 

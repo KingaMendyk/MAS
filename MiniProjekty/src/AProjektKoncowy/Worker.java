@@ -105,4 +105,12 @@ public abstract class Worker extends Person{
     public void setWorkHours(int workHours) {
         this.workHours = workHours;
     }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
 }

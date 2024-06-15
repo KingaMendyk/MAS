@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
+    private int id;
     private int number;
     private int size;
     private List<String> equipment = new ArrayList<>();
@@ -22,7 +23,7 @@ public class Room {
         this.hotel = hotel;
     }
 
-    public static Room createRoom(Hotel hotel, int id, int number, int size){
+    public static Room createRoom(Hotel hotel, int number, int size){
         if(hotel == null){
             System.out.println("Podany hotel nie istnieje!");
             return null;
