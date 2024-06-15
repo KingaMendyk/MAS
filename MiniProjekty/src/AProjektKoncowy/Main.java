@@ -2,7 +2,9 @@ package AProjektKoncowy;
 
 import AProjektKoncowy.AnimalSpecies.Cat;
 import AProjektKoncowy.AnimalSpecies.Dog;
+import AProjektKoncowy.GUI.GUI;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.util.Random;
 
@@ -90,9 +92,7 @@ public class Main {
         worker1.assignToRoom(hotel1.getRooms().get(2));
         worker1.assignToRoom(hotel1.getRooms().get(3));
 
-        System.out.println(hotel1.getAvailableRooms(LocalDate.parse("2024-06-19"), LocalDate.parse("2024-06-22")));
-        owner2.makeReservation(hotel1.getRooms().get(0), "2024-06-19", "2024-06-22");
-        System.out.println(hotel1.getAvailableRooms(LocalDate.parse("2024-06-19"), LocalDate.parse("2024-06-23")));
 
+        SwingUtilities.invokeLater(() -> {new GUI(owner1);});
     }
 }

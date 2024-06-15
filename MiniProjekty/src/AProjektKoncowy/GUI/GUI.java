@@ -1,14 +1,17 @@
 package AProjektKoncowy.GUI;
 
-import MP04.Animal;
-import MP04.AnimalSpecies.Cat;
-import MP04.AnimalSpecies.Dog;
-import MP04.Hotel;
-import MP04.Room;
+import AProjektKoncowy.Animal;
+import AProjektKoncowy.AnimalOwner;
+import AProjektKoncowy.AnimalSpecies.Cat;
+import AProjektKoncowy.Hotel;
+import AProjektKoncowy.Room;
+import AProjektKoncowy.AnimalSpecies.Dog;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GUI {
     private JFrame mainFrame;
@@ -80,36 +83,20 @@ public class GUI {
     private JLabel dateTitleLabel;
     private JLabel hotelTitleLabel;
     private JLabel animalTitleLabel;
+    private JButton backButton;
 
-    public GUI(){
+    public GUI(AnimalOwner owner){
         mainFrame = new JFrame();
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+        //Modele list
         DefaultListModel<Animal> animalListModel = new DefaultListModel<>();
         animalList.setModel(animalListModel);
-        animalListModel.addElement(new Cat("Mruczek", "2020-03-01"));
-        animalListModel.addElement(new Dog("Azor    ", "2010-02-10"));
 
         DefaultListModel<Hotel> hotelListModel = new DefaultListModel<>();
         hotelList.setModel(hotelListModel);
-        Hotel h1 = new Hotel("Zwierzakowo Warszawa", "ul. Karowa 8, Warszawa");
-        Hotel h2 = new Hotel("Zwierzakowo Lublin    ", "ul. Pana Balcera 20, Lublin");
-
-        h1.addRoom(Room.createRoom(h1, 0, 1, 3));
-        h1.addRoom(Room.createRoom(h1, 1, 2, 2));
-        h1.addRoom(Room.createRoom(h1, 2, 3, 4));
-
-        h2.addRoom(Room.createRoom(h2, 3, 1, 3));
-        h2.addRoom(Room.createRoom(h2, 4, 2, 3));
-
-        hotelListModel.addElement(h1);
-        hotelListModel.addElement(h2);
 
         DefaultListModel<Room> roomListModel = new DefaultListModel<>();
         roomList.setModel(roomListModel);
-        for(Room room : h1.getRooms()){
-            roomListModel.addElement(room);
-        }
 
         enum AnimalSpecies{
             kot, pies, papuga
@@ -119,6 +106,7 @@ public class GUI {
         typeComboBox.addItem(AnimalSpecies.pies);
         typeComboBox.addItem(AnimalSpecies.papuga);
 
+        //Model tabeli
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.addColumn("Label");
         tableModel.addColumn("Value");
@@ -128,11 +116,89 @@ public class GUI {
 
         deailsTable.setRowHeight(65);
         deailsTable.setModel(tableModel);
-        tableModel.addRow(new Object[]{"Hotel", h1.getName()});
-        tableModel.addRow(new Object[]{"Pokój", h1.getRooms().get(2).getNumber()});
-        tableModel.addRow(new Object[]{"Data od", "2024-07-08"});
-        tableModel.addRow(new Object[]{"Data do", "2024-07-10"});
-        tableModel.addRow(new Object[]{"Zwierzę", Animal.getAllAnimals().get(1).getName()});
+        //tableModel.addRow(new Object[]{"Hotel", h1.getName()});
+        //tableModel.addRow(new Object[]{"Pokój", h1.getRooms().get(2).getNumber()});
+        //tableModel.addRow(new Object[]{"Data od", "2024-07-08"});
+        //tableModel.addRow(new Object[]{"Data do", "2024-07-10"});
+        //tableModel.addRow(new Object[]{"Zwierzę", Animal.getAllAnimals().get(1).getName()});
+
+        //Strona główna
+        showAnimalsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                animalListModel.clear();
+                for(Animal animal : owner.getAnimals()){
+                    animalListModel.addElement(animal);
+                }
+
+                if(mainViewPanel.isVisible()) {
+                    mainViewPanel.setVisible(false);
+                    animalsViewPanel.setVisible(true);
+                }
+                else{
+                    roomPanel.setVisible(false);
+                    animalsViewPanel.setVisible(true);
+                    animalLabel.setText("Wybierz zwierzę");
+                    backButton.setVisible(false);
+                }
+            }
+        });
+
+        reserveRoomButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                mainViewPanel.setVisible(false);
+                hotelPanel.setVisible(true);
+                hotelListModel.clear();
+                for(Hotel hotel : Hotel.getAllHotels()){
+                    hotelListModel.addElement(hotel);
+                }
+            }
+        });
+
+        //Panel zwierząt
+        addAnimalButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                animalsViewPanel.setVisible(false);
+                animalFormPanel.setVisible(true);
+            }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                animalsViewPanel.setVisible(false);
+                mainViewPanel.setVisible(true);
+            }
+        });
+
+        //Panel formularza ze zwierzetami
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                String name = nameTextField.getText();
+                String dateOfBirth = birthDateTextField.getText();
+                Double weight = Double.parseDouble(weightTextField.getText());
+                switch(typeComboBox.getSelectedIndex()){
+                    case 0 -> owner.addAnimal(new Cat(name, dateOfBirth, weight));
+                    case 1 -> owner.addAnimal(new Dog(name, dateOfBirth, weight));
+                    default -> {}
+                }
+
+                animalListModel.clear();;
+                for(Animal animal : owner.getAnimals()){
+                    animalListModel.addElement(animal);
+                }
+                animalFormPanel.setVisible(false);
+                animalsViewPanel.setVisible(true);
+            }
+        });
+
+        //Panel hoteli
+        
+
+
 
         mainFrame.add(mainPanel);
 
@@ -160,10 +226,5 @@ public class GUI {
         mainFrame.setSize(980, 700);
         mainFrame.setResizable(false);
         mainFrame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new GUI();});
     }
 }

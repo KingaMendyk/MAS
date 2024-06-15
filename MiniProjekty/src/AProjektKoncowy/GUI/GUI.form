@@ -174,7 +174,7 @@
                   </component>
                 </children>
               </grid>
-              <grid id="c7bbf" binding="animalLowerPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="10">
+              <grid id="c7bbf" binding="animalLowerPanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="10">
                 <margin top="30" left="100" bottom="30" right="100"/>
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -186,7 +186,7 @@
                 <children>
                   <component id="d6e72" class="javax.swing.JLabel" binding="animalLabel">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <font name="Inter Semi Bold" size="20" style="1"/>
@@ -198,7 +198,7 @@
                   </component>
                   <component id="6cc73" class="javax.swing.JList" binding="animalList">
                     <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                      <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="50"/>
                       </grid>
                     </constraints>
@@ -208,7 +208,7 @@
                   </component>
                   <component id="1c584" class="javax.swing.JButton" binding="addAnimalButton">
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false">
+                      <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false">
                         <preferred-size width="80" height="-1"/>
                       </grid>
                     </constraints>
@@ -216,6 +216,20 @@
                       <font name="Inter Semi Bold" size="14" style="1"/>
                       <foreground color="-13948117"/>
                       <text value="Dodaj zwierzę"/>
+                    </properties>
+                  </component>
+                  <component id="f29d4" class="javax.swing.JButton" binding="backButton">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="80" height="-1"/>
+                        <preferred-size width="80" height="-1"/>
+                        <maximum-size width="80" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <font name="Inter Semi Bold" size="14" style="1"/>
+                      <foreground color="-13948117"/>
+                      <text value="Powrót"/>
                     </properties>
                   </component>
                 </children>
