@@ -128,6 +128,12 @@ public class GUI {
         deailsTable.setRowHeight(65);
         deailsTable.setModel(tableModel);
 
+        tableModel.addRow(new Object[]{"Hotel", "hotel name"});
+        tableModel.addRow(new Object[]{"Pokój", "room number"});
+        tableModel.addRow(new Object[]{"Data od", "date from"});
+        tableModel.addRow(new Object[]{"Data do", "date to"});
+        tableModel.addRow(new Object[]{"Zwierzę", "animal name"});
+
 
         //Strona główna
         showAnimalsButton.addActionListener(new ActionListener() {
@@ -182,11 +188,11 @@ public class GUI {
                     animalsViewPanel.setVisible(false);
                     reservationPanel.setVisible(true);
 
-                    tableModel.addRow(new Object[]{"Hotel", selectedHotel.getName()});
-                    tableModel.addRow(new Object[]{"Pokój", selectedRoom.getRoomNumber()});
-                    tableModel.addRow(new Object[]{"Data od", dateFrom});
-                    tableModel.addRow(new Object[]{"Data do", dateTo});
-                    tableModel.addRow(new Object[]{"Zwierzę", selectedAnimal.getName()});
+                    tableModel.setValueAt(selectedHotel.getName(), 0, 1);
+                    tableModel.setValueAt(selectedRoom.getRoomNumber(), 1, 1);
+                    tableModel.setValueAt(dateFrom, 2, 1);
+                    tableModel.setValueAt(dateTo, 3, 1);
+                    tableModel.setValueAt(selectedAnimal.getName(), 4, 1);
                 }
             }
         });
