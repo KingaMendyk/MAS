@@ -1,8 +1,8 @@
 package AProjektKoncowy;
 
 import AProjektKoncowy.Enums.PersonType;
-import MP03.Owner;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -143,5 +143,32 @@ public abstract class Person {
             }
         }
         return "";
+    }
+
+    //Ekstensja i trwałość
+    private static void serializeAll(ObjectOutputStream stream) throws IOException {
+        stream.writeObject(allPeople);
+    }
+
+    private static void deserializeAll(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+        allPeople = (ArrayList<Person>) stream.readObject();
+    }
+
+    public static void saveToFile(String fileName){
+        try {
+            serializeAll(new ObjectOutputStream(new FileOutputStream(fileName)));
+        } catch(IOException ex){
+            System.out.println("Error while saving to file");
+        }
+    }
+
+    public static void readFromFile(String fileName){
+        try {
+            deserializeAll(new ObjectInputStream(new FileInputStream(fileName)));
+        } catch(IOException ex) {
+            System.out.println("Error while reading from file");
+        } catch(ClassNotFoundException ex) {
+            System.out.println("Class not found");
+        }
     }
 }

@@ -1,6 +1,7 @@
 package AProjektKoncowy;
 
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -94,5 +95,32 @@ public class Hotel {
     @Override
     public String toString(){
         return "Hotel " + name + " adres: " + address + " liczba pokoi: " + rooms.size();
+    }
+
+    //Ekstensja i trwałość
+    private static void serializeAll(ObjectOutputStream stream) throws IOException {
+        stream.writeObject(allHotels);
+    }
+
+    private static void deserializeAll(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+        allHotels = (ArrayList<Hotel>) stream.readObject();
+    }
+
+    public static void saveToFile(String fileName){
+        try {
+            serializeAll(new ObjectOutputStream(new FileOutputStream(fileName)));
+        } catch(IOException ex){
+            System.out.println("Error while saving to file");
+        }
+    }
+
+    public static void readFromFile(String fileName){
+        try {
+            deserializeAll(new ObjectInputStream(new FileInputStream(fileName)));
+        } catch(IOException ex) {
+            System.out.println("Error while reading from file");
+        } catch(ClassNotFoundException ex) {
+            System.out.println("Class not found");
+        }
     }
 }
