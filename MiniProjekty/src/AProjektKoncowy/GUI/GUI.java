@@ -139,27 +139,30 @@ public class GUI {
         showAnimalsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                animalListModel.clear();
+                animalListModel.removeAllElements();
                 for(Animal animal : owner.getAnimals()){
                     animalListModel.addElement(animal);
                 }
+
                 animalLabel.setText("Twoje zwierzęta");
                 backButton.setVisible(true);
                 mainViewPanel.setVisible(false);
                 animalsViewPanel.setVisible(true);
             }
         });
-        //TODO BUG z jakiegoś powodu za drugim razem wyswietla panel daty zamiast hotelu
+        //TODO fix panel sizes
 
         reserveRoomButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                mainViewPanel.setVisible(false);
-                hotelPanel.setVisible(true);
-                hotelListModel.clear();
+                hotelListModel.removeAllElements();
                 for(Hotel hotel : Hotel.getAllHotels()){
                     hotelListModel.addElement(hotel);
+
                 }
+
+                mainViewPanel.setVisible(false);
+                hotelPanel.setVisible(true);
             }
         });
 
@@ -185,16 +188,16 @@ public class GUI {
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
                 if(selectedRoom != null && !listSelectionEvent.getValueIsAdjusting()){
                     selectedAnimal = (Animal)animalList.getSelectedValue();
-                    System.out.println(selectedAnimal);
                     owner.getLatestReservation().setAnimal(selectedAnimal);
-                    animalsViewPanel.setVisible(false);
-                    reservationPanel.setVisible(true);
 
                     tableModel.setValueAt(selectedHotel.getName(), 0, 1);
                     tableModel.setValueAt(selectedRoom.getRoomNumber(), 1, 1);
                     tableModel.setValueAt(dateFrom, 2, 1);
                     tableModel.setValueAt(dateTo, 3, 1);
                     tableModel.setValueAt(selectedAnimal.getName(), 4, 1);
+
+                    animalsViewPanel.setVisible(false);
+                    reservationPanel.setVisible(true);
                 }
             }
         });
@@ -212,7 +215,7 @@ public class GUI {
                     default -> {}
                 }
 
-                animalListModel.clear();;
+                animalListModel.removeAllElements();;
                 for(Animal animal : owner.getAnimals()){
                     animalListModel.addElement(animal);
                 }
@@ -251,12 +254,13 @@ public class GUI {
                             "default");
                 }
                 else{
-                    datePanel.setVisible(false);
-                    roomPanel.setVisible(true);
-                    roomListModel.clear();
+                    roomListModel.removeAllElements();
                     for(Room room : selectedHotel.getAvailableRooms(dateFrom, dateTo)){
                         roomListModel.addElement(room);
                     }
+
+                    datePanel.setVisible(false);
+                    roomPanel.setVisible(true);
                 }
             }
         });
@@ -270,14 +274,15 @@ public class GUI {
 
                     owner.makeReservation(selectedRoom, dateFrom.toString(), dateTo.toString());
 
+                    animalListModel.removeAllElements();
+                    for (Animal animal : owner.getAnimals()) {
+                        animalListModel.addElement(animal);
+                    }
+
                     roomPanel.setVisible(false);
                     animalsViewPanel.setVisible(true);
                     animalLabel.setText("Wybierz zwierzę");
                     backButton.setVisible(false);
-                    animalListModel.clear();
-                    for (Animal animal : owner.getAnimals()) {
-                        animalListModel.addElement(animal);
-                    }
                 }
             }
         });
