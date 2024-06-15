@@ -133,16 +133,26 @@ public abstract class Person {
     public String toString(){
         String basicString = name + " " + surname + " (" + personType.toString() + ")";
         String ownerString = "";
-        String staffWrkerString = "";
+        String staffWorkerString = "";
         String managerString = "";
 
         switch(personType){
             case Owner -> ownerString = ", liczba zwierząt: " + owner.getAnimals().size();
             case Worker ->{
-                //worker.get
+                switch(worker.getWorkerType()){
+                    case StaffWorker -> staffWorkerString = ", liczba przypisanych pokoi: " + worker.getStaffWorker().getRoomCount();
+                    case Manager -> managerString = ", kierownik hotelu " + worker.getHotel();
+                }
+            }
+            case OwnerWorker ->{
+                ownerString = ", liczba zwierząt: " + owner.getAnimals().size();
+                switch(worker.getWorkerType()){
+                    case StaffWorker -> staffWorkerString = ", liczba przypisanych pokoi: " + worker.getStaffWorker().getRoomCount();
+                    case Manager -> managerString = ", kierownik hotelu " + worker.getHotel();
+                }
             }
         }
-        return "";
+        return basicString + ownerString + staffWorkerString + managerString;
     }
 
     //Ekstensja i trwałość

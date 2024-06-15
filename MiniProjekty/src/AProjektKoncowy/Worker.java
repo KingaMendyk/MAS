@@ -113,4 +113,18 @@ public abstract class Worker extends Person{
     public Hotel getHotel() {
         return hotel;
     }
+
+    public WorkerType getWorkerType() {
+        return workerType;
+    }
+
+    public StaffWorker getStaffWorker() {
+        return staffWorker;
+    }
+
+    public HotelManager getManager() {
+        return manager;
+    }
+
+
 }

@@ -30,6 +30,10 @@ public class StaffWorker extends Worker{
         this.worker = worker;
     }
 
+    public int getRoomCount() {
+        return roomCount;
+    }
+
     public boolean assignToRoom(Room room){
         if(Arrays.asList(assignedRooms).contains(room)){
             return false;
