@@ -2,6 +2,7 @@ package AProjektKoncowy;
 
 import AProjektKoncowy.Enums.PersonType;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +33,9 @@ public class AnimalOwner extends Person {
         }
     }
 
-    public void makeReservation(int roomId, Animal animal){
-        //TODO
+    public void makeReservation(Room room, String dateFrom, String dateTo){
+        Reservation reservation = new Reservation(room, LocalDate.parse(dateFrom), LocalDate.parse(dateTo));
+        reservation.addOwner(this);
     }
 
     public void addReservation(Reservation reservation){

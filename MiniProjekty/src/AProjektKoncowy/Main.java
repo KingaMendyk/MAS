@@ -44,7 +44,7 @@ public class Main {
 
         //Pokoje
         Random random = new Random();
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 4; i++){
             hotel1.addRoom(Room.createRoom(hotel1, i, random.nextInt(4) + 1));
         }
         for(int i = 0; i < 5; i++){

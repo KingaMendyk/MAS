@@ -69,8 +69,7 @@ public class Animal {
         }
     }
 
-    public void addAnimalInRoom(AnimalInRoom animalRoom)
-    {
+    public void addAnimalInRoom(AnimalInRoom animalRoom) {
         if(!animalInRoom.contains(animalRoom)) {
             animalInRoom.add(animalRoom);
         }
@@ -125,6 +124,8 @@ public class Animal {
     public AnimalOwner getOwner() {
         return owner;
     }
+
+
 
     public String getInfo(){
         return this.toString();

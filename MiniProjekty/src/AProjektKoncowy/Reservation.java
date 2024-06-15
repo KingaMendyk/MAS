@@ -14,11 +14,17 @@ public class Reservation {
     private ReservationState state;
 
     private AnimalOwner animalOwner;
+    private Animal animal;
+    private AnimalInRoom animalInRoom;
     private Room room;
 
 
-    public Reservation(){
+    public Reservation(Room room, LocalDate dateFrom, LocalDate dateTo){
         setId();
+        addRoom(room);
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        changeState(ReservationState.InProgress);
     }
 
     public void addOwner(AnimalOwner owner){
@@ -73,15 +79,33 @@ public class Reservation {
         this.dateTo = dateTo;
     }
 
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        animalInRoom = new AnimalInRoom(animal, room);
+        animal.addAnimalInRoom(animalInRoom);
+        room.addAnimalInRoom(animalInRoom);
+    }
+
+    public void removeAnimal(Animal animal){
+        animal.removeAnimalInRoom(animalInRoom);
+        room.removeAnimalInRoom(animalInRoom);
+    }
+
     public void changeState(ReservationState state){
         this.state = state;
     }
 
     public void save(){
-
+        changeState(ReservationState.Accepted);
     }
 
     public void delete(){
-
+        removeOwner(animalOwner);
+        removeRoom(room);
+        removeAnimal(animal);
+        changeState(ReservationState.Cancelled);
     }
 }

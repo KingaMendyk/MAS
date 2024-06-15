@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
-    private int id;
     private int number;
     private int size;
     private List<String> equipment = new ArrayList<>();

@@ -1,4 +1,4 @@
-package GUI;
+package AProjektKoncowy.GUI;
 
 import MP04.Animal;
 import MP04.AnimalSpecies.Cat;
