@@ -158,7 +158,7 @@ public abstract class Person {
         try {
             serializeAll(new ObjectOutputStream(new FileOutputStream(fileName)));
         } catch(IOException ex){
-            System.out.println("Error while saving to file");
+            System.out.println("Błąd podczas zapisywania pliku");
         }
     }
 
@@ -166,9 +166,9 @@ public abstract class Person {
         try {
             deserializeAll(new ObjectInputStream(new FileInputStream(fileName)));
         } catch(IOException ex) {
-            System.out.println("Error while reading from file");
+            System.out.println("Błąd podczas wczytywania pliku");
         } catch(ClassNotFoundException ex) {
-            System.out.println("Class not found");
+            System.out.println("Klasa nie znaleziona");
         }
     }
 }

@@ -25,7 +25,7 @@ public class Hotel {
     public void addRoom(Room room){
         if(!rooms.contains(room)) {
             if (allRooms.contains(room)) {
-                System.out.println("Room already exists in hotel " + room.getHotel().getName());
+                System.out.println("Pokój już należy do hotelu " + room.getHotel().getName());
                 return;
             }
 
@@ -110,7 +110,7 @@ public class Hotel {
         try {
             serializeAll(new ObjectOutputStream(new FileOutputStream(fileName)));
         } catch(IOException ex){
-            System.out.println("Error while saving to file");
+            System.out.println("Błąd podczas zapisywania pliku");
         }
     }
 
@@ -118,9 +118,9 @@ public class Hotel {
         try {
             deserializeAll(new ObjectInputStream(new FileInputStream(fileName)));
         } catch(IOException ex) {
-            System.out.println("Error while reading from file");
+            System.out.println("Błąd podczas wczytywania pliku");
         } catch(ClassNotFoundException ex) {
-            System.out.println("Class not found");
+            System.out.println("Klasa nie znaleziona");
         }
     }
 }

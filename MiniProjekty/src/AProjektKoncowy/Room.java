@@ -24,7 +24,7 @@ public class Room {
 
     public static Room createRoom(Hotel hotel, int id, int number, int size){
         if(hotel == null){
-            System.out.println("Hotel does not exist!");
+            System.out.println("Podany hotel nie istnieje!");
             return null;
         }
 

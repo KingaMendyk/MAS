@@ -36,7 +36,7 @@ public class StaffWorker extends Worker{
         }
 
         if(roomCount >= maxRoomCount){
-            System.out.println("Max limit reached");
+            System.out.println("Osiągnięto limit przypisanych pokoi");
             return false;
         }
 
