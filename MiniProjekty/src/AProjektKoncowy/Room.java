@@ -2,6 +2,8 @@ package AProjektKoncowy;
 
 
 
+import AProjektKoncowy.Enums.ReservationState;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,17 +39,19 @@ public class Room {
     public boolean isAvailable(LocalDate dateFrom, LocalDate dateTo){
         boolean available = true;
         for(Reservation reservation : getReservations()){
-            LocalDate resDateFrom = reservation.getDateFrom();
-            LocalDate resDateTo = reservation.getDateTo();
+            if(reservation.getState() == ReservationState.Accepted) {
+                LocalDate resDateFrom = reservation.getDateFrom();
+                LocalDate resDateTo = reservation.getDateTo();
 
-            if (dateFrom == resDateFrom && dateTo == resDateTo) {
-                available = false;
-                break;
-            }
+                if (dateFrom == resDateFrom && dateTo == resDateTo) {
+                    available = false;
+                    break;
+                }
 
-            if (dateFrom.isBefore(resDateFrom) || dateTo.isAfter(resDateTo)) {
-                available = false;
-                break;
+                if (dateFrom.isBefore(resDateFrom) || dateTo.isAfter(resDateTo)) {
+                    available = false;
+                    break;
+                }
             }
         }
         return available;

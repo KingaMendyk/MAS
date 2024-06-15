@@ -53,6 +53,10 @@ public class AnimalOwner extends Person {
         reservation.removeOwner(this);
     }
 
+    public Reservation getLatestReservation(){
+        return reservations.get(reservations.size() - 1);
+    }
+
     public void setPerson(Person person) {
         this.person = person;
     }
