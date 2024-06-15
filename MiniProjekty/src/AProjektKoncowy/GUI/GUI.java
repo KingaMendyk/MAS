@@ -149,6 +149,7 @@ public class GUI {
                 animalsViewPanel.setVisible(true);
             }
         });
+        //TODO BUG z jakiegoś powodu za drugim razem wyswietla panel daty zamiast hotelu
 
         reserveRoomButton.addActionListener(new ActionListener() {
             @Override
@@ -182,8 +183,9 @@ public class GUI {
         animalList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
-                if(selectedRoom != null){
+                if(selectedRoom != null && !listSelectionEvent.getValueIsAdjusting()){
                     selectedAnimal = (Animal)animalList.getSelectedValue();
+                    System.out.println(selectedAnimal);
                     owner.getLatestReservation().setAnimal(selectedAnimal);
                     animalsViewPanel.setVisible(false);
                     reservationPanel.setVisible(true);
@@ -223,9 +225,11 @@ public class GUI {
         hotelList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
-                selectedHotel = (Hotel)hotelList.getSelectedValue();
-                hotelPanel.setVisible(false);
-                datePanel.setVisible(true);
+                if(!listSelectionEvent.getValueIsAdjusting()) {
+                    selectedHotel = (Hotel) hotelList.getSelectedValue();
+                    hotelPanel.setVisible(false);
+                    datePanel.setVisible(true);
+                }
             }
         });
 
@@ -261,17 +265,19 @@ public class GUI {
         roomList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
-                selectedRoom = (Room)roomList.getSelectedValue();
+                if(!listSelectionEvent.getValueIsAdjusting()) {
+                    selectedRoom = (Room) roomList.getSelectedValue();
 
-                owner.makeReservation(selectedRoom, dateFrom.toString(), dateTo.toString());
+                    owner.makeReservation(selectedRoom, dateFrom.toString(), dateTo.toString());
 
-                roomPanel.setVisible(false);
-                animalsViewPanel.setVisible(true);
-                animalLabel.setText("Wybierz zwierzę");
-                backButton.setVisible(false);
-                animalListModel.clear();
-                for(Animal animal : owner.getAnimals()){
-                    animalListModel.addElement(animal);
+                    roomPanel.setVisible(false);
+                    animalsViewPanel.setVisible(true);
+                    animalLabel.setText("Wybierz zwierzę");
+                    backButton.setVisible(false);
+                    animalListModel.clear();
+                    for (Animal animal : owner.getAnimals()) {
+                        animalListModel.addElement(animal);
+                    }
                 }
             }
         });
@@ -280,15 +286,35 @@ public class GUI {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                JOptionPane.showMessageDialog(reservationPanel, "Rezerwacja anulowana");
+                int res = JOptionPane.showOptionDialog(reservationPanel, "Rezerwacja anulowana",
+                        "Rezerwacja anulowana", JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE, null, null, null);
                 owner.getLatestReservation().changeState(ReservationState.Cancelled);
+
+                if(res == 0){
+                    reservationPanel.setVisible(false);
+                    mainViewPanel.setVisible(true);
+                }
+                selectedHotel = null;
+                selectedRoom = null;
+                selectedAnimal = null;
             }
         });
         acceptButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                JOptionPane.showMessageDialog(reservationPanel, "Rezerwacja zatwierdzona");
+                int res = JOptionPane.showOptionDialog(reservationPanel, "Rezerwacja zatwierdzona",
+                        "Rezerwacja zatwierdzona", JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE, null, null, null);
                 owner.getLatestReservation().changeState(ReservationState.Accepted);
+
+                if(res == 0){
+                    reservationPanel.setVisible(false);
+                    mainViewPanel.setVisible(true);
+                }
+                selectedHotel = null;
+                selectedRoom = null;
+                selectedAnimal = null;
             }
         });
 
