@@ -14,7 +14,7 @@ public class Room {
 
     private List<AnimalInRoom> animalInRoom = new ArrayList<>();
     private List<Reservation> reservations = new ArrayList<>();
-    private List<StaffWorker> assignedWorkers;
+    private List<StaffWorker> assignedWorkers = new ArrayList<>();
 
     private Room(Hotel hotel, int number, int size){
         this.number = number;
@@ -69,8 +69,8 @@ public class Room {
     public void assignWorker(StaffWorker worker){
         if(assignedWorkers.contains(worker))
             return;
-        assignedWorkers.add(worker);
-        worker.assignToRoom(this);
+        if(worker.assignToRoom(this))
+            assignedWorkers.add(worker);
     }
 
     public void removeWorker(StaffWorker worker){

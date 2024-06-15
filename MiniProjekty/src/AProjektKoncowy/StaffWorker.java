@@ -45,6 +45,11 @@ public class StaffWorker extends Worker{
             return false;
         }
 
+        if(room.getHotel() != getHotel()){
+            System.out.println("Nie można przypisać pracownika do hotelu, w którym nie pracuje!");
+            return false;
+        }
+
         assignedRooms[roomCount++] = room;
         room.assignWorker(this);
         return true;

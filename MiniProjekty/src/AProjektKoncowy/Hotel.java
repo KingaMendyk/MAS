@@ -48,8 +48,10 @@ public class Hotel implements Serializable {
     }
 
     public void addWorker(Worker worker) {
-        if(worker.getHotel() != null)
+        if(worker.getHotel() != null){
+            System.out.println("Pracownik pracuje już w innym hotelu");
             return;
+        }
         if(!workers.containsKey(worker.getId())) {
             workers.put(worker.getId(), worker);
             worker.setHotel(this);

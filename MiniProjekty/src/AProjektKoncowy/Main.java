@@ -46,7 +46,7 @@ public class Main {
         //Pokoje
         Random random = new Random();
         for(int i = 0; i < 4; i++){
-            hotel1.addRoom(Room.createRoom(hotel1, i, random.nextInt(4) + 1));
+            hotel1.addRoom(Room.createRoom(hotel1, i, random.nextInt(3) + 1));
         }
         for(int i = 0; i < 5; i++){
             hotel2.addRoom(Room.createRoom(hotel2, i, random.nextInt(3) + 1));
@@ -83,6 +83,12 @@ public class Main {
 
         hotel3.addWorker(worker7);
         hotel3.addWorker(worker8);
+
+        //Pracownik - pokój
+        worker1.assignToRoom(hotel1.getRooms().get(0));
+        worker1.assignToRoom(hotel1.getRooms().get(1));
+        worker1.assignToRoom(hotel1.getRooms().get(2));
+        worker1.assignToRoom(hotel1.getRooms().get(3));
 
         System.out.println(hotel1.getAvailableRooms(LocalDate.parse("2024-06-19"), LocalDate.parse("2024-06-22")));
         owner2.makeReservation(hotel1.getRooms().get(0), "2024-06-19", "2024-06-22");
