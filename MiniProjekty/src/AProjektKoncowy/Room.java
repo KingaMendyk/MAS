@@ -40,6 +40,11 @@ public class Room {
             LocalDate resDateFrom = reservation.getDateFrom();
             LocalDate resDateTo = reservation.getDateTo();
 
+            if (dateFrom == resDateFrom && dateTo == resDateTo) {
+                available = false;
+                break;
+            }
+
             if (dateFrom.isBefore(resDateFrom) || dateTo.isAfter(resDateTo)) {
                 available = false;
                 break;
