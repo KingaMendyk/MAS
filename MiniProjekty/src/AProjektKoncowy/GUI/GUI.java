@@ -5,6 +5,7 @@ import AProjektKoncowy.AnimalSpecies.Cat;
 import AProjektKoncowy.Enums.ReservationState;
 import AProjektKoncowy.AnimalSpecies.Dog;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -12,6 +13,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -98,6 +102,15 @@ public class GUI {
     public GUI(AnimalOwner owner){
         mainFrame = new JFrame();
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        ImageIcon img = new ImageIcon("images/logo.png");
+        mainFrame.setIconImage(img.getImage());
+
+        //Obrazki
+        ImageIcon calendarPicture = new ImageIcon("images/june-2024-calendar-landscape-classic.jpg");
+        calendarPanel.setLayout(new GridLayout(1, 1));
+        calendarPanel.add(new JLabel(new ImageIcon(calendarPicture.getImage().getScaledInstance(400, 350,Image.SCALE_SMOOTH))));
+
+
         //Modele list
         DefaultListModel<Animal> animalListModel = new DefaultListModel<>();
         animalList.setModel(animalListModel);
@@ -395,5 +408,17 @@ public class GUI {
         mainFrame.setSize(980, 700);
         mainFrame.setResizable(false);
         mainFrame.setVisible(true);
+
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedLookAndFeelException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
