@@ -5,7 +5,6 @@ import AProjektKoncowy.AnimalSpecies.Cat;
 import AProjektKoncowy.Enums.ReservationState;
 import AProjektKoncowy.AnimalSpecies.Dog;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -13,9 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -68,7 +64,7 @@ public class GUI {
     private JButton cancelButton;
     private JPanel reservationDetailsPanel;
     private JPanel reservationButtonsPanel;
-    private JTable deailsTable;
+    private JTable detailsTable;
     private JPanel datePanel;
     private JPanel dateUpperPanel;
     private JPanel dateLowerPanel;
@@ -135,10 +131,10 @@ public class GUI {
         tableModel.addColumn("Value");
 
         Dimension dim = new Dimension(50, 2);
-        deailsTable.setIntercellSpacing(dim);
+        detailsTable.setIntercellSpacing(dim);
 
-        deailsTable.setRowHeight(65);
-        deailsTable.setModel(tableModel);
+        detailsTable.setRowHeight(65);
+        detailsTable.setModel(tableModel);
 
         tableModel.addRow(new Object[]{"Hotel", "hotel name"});
         tableModel.addRow(new Object[]{"Pokój", "room number"});
