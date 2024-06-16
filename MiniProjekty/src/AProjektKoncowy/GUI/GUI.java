@@ -140,7 +140,6 @@ public class GUI {
             @Override
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
                 if (!listSelectionEvent.getValueIsAdjusting()) {
-                    System.out.println("Room");
                     selectedRoom = (Room) roomList.getSelectedValue();
 
                     owner.makeReservation(selectedRoom, dateFrom.toString(), dateTo.toString());
@@ -272,7 +271,6 @@ public class GUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 dateFrom = LocalDate.parse(dateFromTextField.getText());
                 dateTo = LocalDate.parse(dateToTextField.getText());
-                System.out.println(selectedHotel);
 
                 List<Room> availableRooms = selectedHotel.getAvailableRooms(dateFrom, dateTo);
 
