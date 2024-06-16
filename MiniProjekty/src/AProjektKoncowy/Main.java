@@ -50,9 +50,12 @@ public class Main {
         for(int i = 0; i < 4; i++){
             hotel1.addRoom(Room.createRoom(hotel1, i+1, random.nextInt(3) + 1));
         }
+        /*
         for(int i = 0; i < 5; i++){
             hotel2.addRoom(Room.createRoom(hotel2, i+1, random.nextInt(3) + 1));
         }
+        */
+
         for(int i = 0; i < 5; i++){
             hotel3.addRoom(Room.createRoom(hotel3, i+1, random.nextInt(2) + 1));
         }

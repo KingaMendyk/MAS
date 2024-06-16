@@ -275,7 +275,7 @@ public class GUI {
                 List<Room> availableRooms = selectedHotel.getAvailableRooms(dateFrom, dateTo);
 
                 if(availableRooms.size() == 0){
-                    JOptionPane.showOptionDialog(datePanel,
+                    int res = JOptionPane.showOptionDialog(datePanel,
                             "Brak wolnych pokoi w podanym terminie. Wybierz inny termin lub anuluj",
                             "Brak dostępnego pokoju",
                             JOptionPane.OK_CANCEL_OPTION,
@@ -283,6 +283,12 @@ public class GUI {
                             null,
                             new String[]{"Anuluj", "OK"},
                             "default");
+                    if(res == 0){
+                        datePanel.setVisible(false);
+                        mainViewPanel.setVisible(true);
+
+                        selectedHotel = null;
+                    }
                 }
                 else {
                     roomList.removeListSelectionListener(roomSelectionListener);
