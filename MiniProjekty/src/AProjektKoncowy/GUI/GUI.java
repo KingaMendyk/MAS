@@ -16,6 +16,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.List;
 
 public class GUI {
     private JFrame mainFrame;
@@ -134,6 +135,62 @@ public class GUI {
         tableModel.addRow(new Object[]{"Data do", "date to"});
         tableModel.addRow(new Object[]{"Zwierzę", "animal name"});
 
+        //Selection Listener
+        ListSelectionListener roomSelectionListener = new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                if (!listSelectionEvent.getValueIsAdjusting()) {
+                    System.out.println("Room");
+                    selectedRoom = (Room) roomList.getSelectedValue();
+
+                    owner.makeReservation(selectedRoom, dateFrom.toString(), dateTo.toString());
+
+                    animalListModel.removeAllElements();
+                    for (Animal animal : owner.getAnimals()) {
+                        animalListModel.addElement(animal);
+                    }
+
+                    roomPanel.setVisible(false);
+                    animalsViewPanel.setVisible(true);
+                    animalLabel.setText("Wybierz zwierzę");
+                    backButton.setVisible(false);
+                }
+            }
+        };
+
+        ListSelectionListener hotelSelectionListener = new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                if(!listSelectionEvent.getValueIsAdjusting()) {
+                    selectedHotel = (Hotel) hotelList.getSelectedValue();
+                    dateFromTextField.setText("");
+                    dateToTextField.setText("");
+
+                    hotelPanel.setVisible(false);
+                    datePanel.setVisible(true);
+                }
+            }
+        };
+
+        ListSelectionListener animalSelectionListener = new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                if(selectedRoom != null && !listSelectionEvent.getValueIsAdjusting()){
+                    selectedAnimal = (Animal)animalList.getSelectedValue();
+                    owner.getLatestReservation().setAnimal(selectedAnimal);
+
+                    tableModel.setValueAt(selectedHotel.getName(), 0, 1);
+                    tableModel.setValueAt(selectedRoom.getRoomNumber(), 1, 1);
+                    tableModel.setValueAt(dateFrom, 2, 1);
+                    tableModel.setValueAt(dateTo, 3, 1);
+                    tableModel.setValueAt(selectedAnimal.getName(), 4, 1);
+
+                    animalsViewPanel.setVisible(false);
+                    reservationPanel.setVisible(true);
+                }
+            }
+        };
+
 
         //Strona główna
         showAnimalsButton.addActionListener(new ActionListener() {
@@ -150,16 +207,17 @@ public class GUI {
                 animalsViewPanel.setVisible(true);
             }
         });
-        //TODO fix panel sizes
 
         reserveRoomButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                hotelList.removeListSelectionListener(hotelSelectionListener);
                 hotelListModel.removeAllElements();
                 for(Hotel hotel : Hotel.getAllHotels()){
                     hotelListModel.addElement(hotel);
 
                 }
+                hotelList.addListSelectionListener(hotelSelectionListener);
 
                 mainViewPanel.setVisible(false);
                 hotelPanel.setVisible(true);
@@ -183,25 +241,6 @@ public class GUI {
             }
         });
 
-        animalList.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent listSelectionEvent) {
-                if(selectedRoom != null && !listSelectionEvent.getValueIsAdjusting()){
-                    selectedAnimal = (Animal)animalList.getSelectedValue();
-                    owner.getLatestReservation().setAnimal(selectedAnimal);
-
-                    tableModel.setValueAt(selectedHotel.getName(), 0, 1);
-                    tableModel.setValueAt(selectedRoom.getRoomNumber(), 1, 1);
-                    tableModel.setValueAt(dateFrom, 2, 1);
-                    tableModel.setValueAt(dateTo, 3, 1);
-                    tableModel.setValueAt(selectedAnimal.getName(), 4, 1);
-
-                    animalsViewPanel.setVisible(false);
-                    reservationPanel.setVisible(true);
-                }
-            }
-        });
-
         //Panel formularza ze zwierzetami
         okButton.addActionListener(new ActionListener() {
             @Override
@@ -215,27 +254,15 @@ public class GUI {
                     default -> {}
                 }
 
+                animalList.removeListSelectionListener(animalSelectionListener);
                 animalListModel.removeAllElements();;
                 for(Animal animal : owner.getAnimals()){
                     animalListModel.addElement(animal);
                 }
+                animalList.addListSelectionListener(animalSelectionListener);
+
                 animalFormPanel.setVisible(false);
                 animalsViewPanel.setVisible(true);
-            }
-        });
-
-        //Panel hoteli
-        hotelList.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent listSelectionEvent) {
-                if(!listSelectionEvent.getValueIsAdjusting()) {
-                    selectedHotel = (Hotel) hotelList.getSelectedValue();
-                    dateFromTextField.setText("");
-                    dateToTextField.setText("");
-
-                    hotelPanel.setVisible(false);
-                    datePanel.setVisible(true);
-                }
             }
         });
 
@@ -245,8 +272,11 @@ public class GUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 dateFrom = LocalDate.parse(dateFromTextField.getText());
                 dateTo = LocalDate.parse(dateToTextField.getText());
+                System.out.println(selectedHotel);
 
-                if(selectedHotel.getAvailableRooms(dateFrom, dateTo).size() == 0){
+                List<Room> availableRooms = selectedHotel.getAvailableRooms(dateFrom, dateTo);
+
+                if(availableRooms.size() == 0){
                     JOptionPane.showOptionDialog(datePanel,
                             "Brak wolnych pokoi w podanym terminie. Wybierz inny termin lub anuluj",
                             "Brak dostępnego pokoju",
@@ -256,37 +286,16 @@ public class GUI {
                             new String[]{"Anuluj", "OK"},
                             "default");
                 }
-                else{
+                else {
+                    roomList.removeListSelectionListener(roomSelectionListener);
                     roomListModel.removeAllElements();
-                    for(Room room : selectedHotel.getAvailableRooms(dateFrom, dateTo)){
+                    for(Room room : availableRooms){
                         roomListModel.addElement(room);
                     }
+                    roomList.addListSelectionListener(roomSelectionListener);
 
                     datePanel.setVisible(false);
                     roomPanel.setVisible(true);
-                }
-            }
-        });
-
-        //Panel pokoi
-        roomList.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent listSelectionEvent) {
-                System.out.println("Room");
-                if(!listSelectionEvent.getValueIsAdjusting()) {
-                    selectedRoom = (Room) roomList.getSelectedValue();
-
-                    owner.makeReservation(selectedRoom, dateFrom.toString(), dateTo.toString());
-
-                    animalListModel.removeAllElements();
-                    for (Animal animal : owner.getAnimals()) {
-                        animalListModel.addElement(animal);
-                    }
-
-                    roomPanel.setVisible(false);
-                    animalsViewPanel.setVisible(true);
-                    animalLabel.setText("Wybierz zwierzę");
-                    backButton.setVisible(false);
                 }
             }
         });
