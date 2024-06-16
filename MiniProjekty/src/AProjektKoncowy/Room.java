@@ -4,11 +4,12 @@ package AProjektKoncowy;
 
 import AProjektKoncowy.Enums.ReservationState;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Room {
+public class Room implements Serializable {
     private int number;
     private int size;
     private List<String> equipment = new ArrayList<>();

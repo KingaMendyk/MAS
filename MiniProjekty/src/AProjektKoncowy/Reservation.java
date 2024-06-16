@@ -2,11 +2,12 @@ package AProjektKoncowy;
 
 import AProjektKoncowy.Enums.ReservationState;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Reservation {
+public class Reservation implements Serializable {
     private int id;
     private List<Integer> allIds = new ArrayList<>();
     private LocalDate dateFrom;

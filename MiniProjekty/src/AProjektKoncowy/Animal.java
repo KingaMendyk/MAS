@@ -125,7 +125,9 @@ public class Animal implements Serializable{
         return owner;
     }
 
-
+    public static List<Animal> getAllAnimals() {
+        return allAnimals;
+    }
 
     public String getInfo(){
         return this.toString();
@@ -149,7 +151,8 @@ public class Animal implements Serializable{
         try {
             serializeAll(new ObjectOutputStream(new FileOutputStream(fileName)));
         } catch(IOException ex){
-            System.out.println("Błąd podczas zapisywania pliku");
+            System.out.println("Błąd podczas zapisywania pliku\n");
+            ex.printStackTrace();
         }
     }
 
@@ -157,9 +160,11 @@ public class Animal implements Serializable{
         try {
             deserializeAll(new ObjectInputStream(new FileInputStream(fileName)));
         } catch(IOException ex) {
-            System.out.println("Błąd podczas wczytywania pliku");
+            System.out.println("Błąd podczas wczytywania pliku\n");
+            ex.printStackTrace();
         } catch(ClassNotFoundException ex) {
-            System.out.println("Klasa nie znaleziona");
+            System.out.println("Klasa nie znaleziona\n");
+            ex.printStackTrace();
         }
     }
 }

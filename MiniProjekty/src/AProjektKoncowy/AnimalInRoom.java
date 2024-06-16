@@ -1,10 +1,10 @@
 package AProjektKoncowy;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AnimalInRoom {
+public class AnimalInRoom implements Serializable {
     private boolean healthCheckup;
     private Animal animal;
     private Room room;
