@@ -13,7 +13,7 @@ public class Main {
 
         if(new File("animals.dat").isFile()){
             SaveHelper.readSession();
-            System.out.println(Animal.getAllAnimals());
+            SwingUtilities.invokeLater(() -> {new GUI(Person.getAllOwners().get(0));});
         }
 
         else {

@@ -136,6 +136,29 @@ public abstract class Person implements Serializable {
         this.worker = worker;
     }
 
+    public static List<Person> getAllPeople() {
+        return allPeople;
+    }
+
+    public static List<AnimalOwner> getAllOwners(){
+        List<AnimalOwner> result = new ArrayList<>();
+        for(Person p : allPeople){
+            if(p.isOwner())
+                result.add((AnimalOwner) p);
+        }
+        return result;
+    }
+
+    public static List<Worker> getAllWorkers(){
+        List<Worker> result = new ArrayList<>();
+        for(Person p : allPeople){
+            if(p.isWorker())
+                result.add((Worker)p);
+        }
+
+        return result;
+    }
+
     @Override
     public String toString(){
         String basicString = name + " " + surname + " ("  + ")";
