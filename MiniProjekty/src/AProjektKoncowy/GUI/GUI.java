@@ -230,6 +230,9 @@ public class GUI {
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
                 if(!listSelectionEvent.getValueIsAdjusting()) {
                     selectedHotel = (Hotel) hotelList.getSelectedValue();
+                    dateFromTextField.setText("");
+                    dateToTextField.setText("");
+
                     hotelPanel.setVisible(false);
                     datePanel.setVisible(true);
                 }
@@ -269,6 +272,7 @@ public class GUI {
         roomList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                System.out.println("Room");
                 if(!listSelectionEvent.getValueIsAdjusting()) {
                     selectedRoom = (Room) roomList.getSelectedValue();
 
