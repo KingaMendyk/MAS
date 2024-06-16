@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class GUI {
@@ -245,11 +246,23 @@ public class GUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 String name = nameTextField.getText();
                 String dateOfBirth = birthDateTextField.getText();
-                Double weight = Double.parseDouble(weightTextField.getText());
-                switch(typeComboBox.getSelectedIndex()){
-                    case 0 -> owner.addAnimal(new Cat(name, dateOfBirth, weight));
-                    case 1 -> owner.addAnimal(new Dog(name, dateOfBirth, weight));
-                    default -> {}
+                if(weightTextField.getText().equals("")) {
+                    switch (typeComboBox.getSelectedIndex()) {
+                        case 0 -> owner.addAnimal(new Cat(name, dateOfBirth));
+                        case 1 -> owner.addAnimal(new Dog(name, dateOfBirth));
+                        default -> {
+                        }
+                    }
+                }
+
+                else{
+                    Double weight = Double.parseDouble(weightTextField.getText());
+                    switch (typeComboBox.getSelectedIndex()) {
+                        case 0 -> owner.addAnimal(new Cat(name, dateOfBirth, weight));
+                        case 1 -> owner.addAnimal(new Dog(name, dateOfBirth, weight));
+                        default -> {
+                        }
+                    }
                 }
 
                 animalList.removeListSelectionListener(animalSelectionListener);
@@ -268,38 +281,63 @@ public class GUI {
         dateOkButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                dateFrom = LocalDate.parse(dateFromTextField.getText());
-                dateTo = LocalDate.parse(dateToTextField.getText());
+                String date1 = dateFromTextField.getText();
+                String date2 = dateToTextField.getText();
 
-                List<Room> availableRooms = selectedHotel.getAvailableRooms(dateFrom, dateTo);
-
-                if(availableRooms.size() == 0){
-                    int res = JOptionPane.showOptionDialog(datePanel,
-                            "Brak wolnych pokoi w podanym terminie. Wybierz inny termin lub anuluj",
-                            "Brak dostępnego pokoju",
-                            JOptionPane.OK_CANCEL_OPTION,
-                            JOptionPane.INFORMATION_MESSAGE,
-                            null,
-                            new String[]{"Anuluj", "OK"},
-                            "default");
-                    if(res == 0){
-                        datePanel.setVisible(false);
-                        mainViewPanel.setVisible(true);
-
-                        selectedHotel = null;
-                    }
+                if(!isDateValid(date1, date2)){
+                    JOptionPane.showMessageDialog(datePanel, "Wprowadź poprawne daty");
                 }
+
                 else {
-                    roomList.removeListSelectionListener(roomSelectionListener);
-                    roomListModel.removeAllElements();
-                    for(Room room : availableRooms){
-                        roomListModel.addElement(room);
-                    }
-                    roomList.addListSelectionListener(roomSelectionListener);
+                    dateFrom = LocalDate.parse(date1);
+                    dateTo = LocalDate.parse(date2);
 
-                    datePanel.setVisible(false);
-                    roomPanel.setVisible(true);
+                    List<Room> availableRooms = selectedHotel.getAvailableRooms(dateFrom, dateTo);
+
+                    if (availableRooms.size() == 0) {
+                        int res = JOptionPane.showOptionDialog(datePanel,
+                                "Brak wolnych pokoi w podanym terminie. Wybierz inny termin lub anuluj",
+                                "Brak dostępnego pokoju",
+                                JOptionPane.OK_CANCEL_OPTION,
+                                JOptionPane.INFORMATION_MESSAGE,
+                                null,
+                                new String[]{"Anuluj", "OK"},
+                                "default");
+                        if (res == 0) {
+                            datePanel.setVisible(false);
+                            mainViewPanel.setVisible(true);
+
+                            selectedHotel = null;
+                        }
+                    } else {
+                        roomList.removeListSelectionListener(roomSelectionListener);
+                        roomListModel.removeAllElements();
+                        for (Room room : availableRooms) {
+                            roomListModel.addElement(room);
+                        }
+                        roomList.addListSelectionListener(roomSelectionListener);
+
+                        datePanel.setVisible(false);
+                        roomPanel.setVisible(true);
+                    }
                 }
+            }
+
+            private boolean isDateValid(String date1, String date2){
+                try {
+                    LocalDate d1 = LocalDate.parse(date1);
+                    LocalDate d2 = LocalDate.parse(date2);
+
+                    if(d1.isBefore(LocalDate.now()) || d2.isBefore(LocalDate.now()))
+                        return false;
+
+                    if(d2.isBefore(d1))
+                        return false;
+
+                } catch (DateTimeParseException e) {
+                    return false;
+                }
+                return true;
             }
         });
 
