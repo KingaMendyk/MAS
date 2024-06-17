@@ -272,36 +272,39 @@ public class GUI {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                String name = nameTextField.getText();
-                String dateOfBirth = birthDateTextField.getText();
-                if(weightTextField.getText().equals("")) {
-                    switch (typeComboBox.getSelectedIndex()) {
-                        case 0 -> owner.addAnimal(new Cat(name, dateOfBirth));
-                        case 1 -> owner.addAnimal(new Dog(name, dateOfBirth));
-                        default -> {
+                try {
+                    String name = nameTextField.getText();
+                    String dateOfBirth = birthDateTextField.getText();
+                    if (weightTextField.getText().equals("")) {
+                        switch (typeComboBox.getSelectedIndex()) {
+                            case 0 -> owner.addAnimal(new Cat(name, dateOfBirth));
+                            case 1 -> owner.addAnimal(new Dog(name, dateOfBirth));
+                            default -> {
+                            }
+                        }
+                    } else {
+                        Double weight = Double.parseDouble(weightTextField.getText());
+                        switch (typeComboBox.getSelectedIndex()) {
+                            case 0 -> owner.addAnimal(new Cat(name, dateOfBirth, weight));
+                            case 1 -> owner.addAnimal(new Dog(name, dateOfBirth, weight));
+                            default -> {
+                            }
                         }
                     }
-                }
 
-                else{
-                    Double weight = Double.parseDouble(weightTextField.getText());
-                    switch (typeComboBox.getSelectedIndex()) {
-                        case 0 -> owner.addAnimal(new Cat(name, dateOfBirth, weight));
-                        case 1 -> owner.addAnimal(new Dog(name, dateOfBirth, weight));
-                        default -> {
-                        }
+                    animalList.removeListSelectionListener(animalSelectionListener);
+                    animalListModel.removeAllElements();
+                    ;
+                    for (Animal animal : owner.getAnimals()) {
+                        animalListModel.addElement(animal);
                     }
-                }
+                    animalList.addListSelectionListener(animalSelectionListener);
 
-                animalList.removeListSelectionListener(animalSelectionListener);
-                animalListModel.removeAllElements();;
-                for(Animal animal : owner.getAnimals()){
-                    animalListModel.addElement(animal);
+                    animalFormPanel.setVisible(false);
+                    animalsViewPanel.setVisible(true);
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(datePanel, "Wprowadź poprawne dane");
                 }
-                animalList.addListSelectionListener(animalSelectionListener);
-
-                animalFormPanel.setVisible(false);
-                animalsViewPanel.setVisible(true);
             }
         });
 
@@ -422,6 +425,8 @@ public class GUI {
 
         mainFrame.setSize(980, 700);
         mainFrame.setResizable(false);
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.pack();
         mainFrame.setVisible(true);
 
         try {
