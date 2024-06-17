@@ -11,7 +11,7 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
 
-        if(new File("animals.dat").isFile()){
+        if(new File("files/animals.dat").isFile()){
             SaveHelper.readSession();
             SwingUtilities.invokeLater(() -> {new GUI(Person.getAllOwners().get(0));});
         }
