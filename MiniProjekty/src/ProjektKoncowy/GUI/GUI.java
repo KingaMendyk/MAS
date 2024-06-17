@@ -242,7 +242,6 @@ public class GUI {
                 hotelListModel.removeAllElements();
                 for(Hotel hotel : Hotel.getAllHotels()){
                     hotelListModel.addElement(hotel);
-
                 }
                 hotelList.addListSelectionListener(hotelSelectionListener);
 
