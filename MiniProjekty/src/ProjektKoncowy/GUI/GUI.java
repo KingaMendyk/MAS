@@ -299,6 +299,8 @@ public class GUI {
                     }
                     animalList.addListSelectionListener(animalSelectionListener);
 
+                    SaveHelper.saveSession();
+
                     animalFormPanel.setVisible(false);
                     animalsViewPanel.setVisible(true);
                 }catch(Exception ex){
