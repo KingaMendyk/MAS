@@ -54,16 +54,21 @@ public class Main {
 
             //Pokoje
             Random random = new Random();
+            String[] equipment = {"drapak", "leżak", "poduszki", "akwarium", "terrarium"};
+
             for (int i = 0; i < 4; i++) {
-                hotel1.addRoom(Room.createRoom(hotel1, i + 1, random.nextInt(3) + 1));
+                Room room = Room.createRoom(hotel1, i + 1, random.nextInt(3) + 1);
+                room.addRoomEquipment(equipment[random.nextInt(equipment.length)]);
             }
 
             for (int i = 0; i < 3; i++) {
-                hotel2.addRoom(Room.createRoom(hotel2, i + 1, random.nextInt(3) + 1));
+                Room room = Room.createRoom(hotel2, i + 1, random.nextInt(3) + 1);
+                room.addRoomEquipment(equipment[random.nextInt(equipment.length)]);
             }
 
             for (int i = 0; i < 5; i++) {
-                hotel3.addRoom(Room.createRoom(hotel3, i + 1, random.nextInt(2) + 1));
+                Room room = Room.createRoom(hotel3, i + 1, random.nextInt(3) + 1);
+                room.addRoomEquipment(equipment[random.nextInt(equipment.length)]);
             }
 
             //Przypisania

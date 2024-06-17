@@ -44,7 +44,7 @@ public class Room implements Serializable {
                 LocalDate resDateFrom = reservation.getDateFrom();
                 LocalDate resDateTo = reservation.getDateTo();
 
-                if (dateFrom == resDateFrom && dateTo == resDateTo) {
+                if (dateFrom.toString().equals(resDateFrom.toString()) && dateTo.toString().equals(resDateTo.toString())) {
                     available = false;
                     break;
                 }
@@ -142,6 +142,13 @@ public class Room implements Serializable {
 
     @Override
     public String toString() {
-        return "Pokój numer: " + number + " Wyposażenie: " + getEquipment().toString();
+        StringBuilder equipmentString = new StringBuilder();
+        if(!equipment.isEmpty()) {
+            for (int i = 0; i < equipment.size() - 1; i++) {
+                equipmentString.append(equipment.get(i)).append(", ");
+            }
+            equipmentString.append(equipment.get(equipment.size() - 1));
+        }
+        return "Pokój numer: " + number + " Wyposażenie: " + equipmentString;
     }
 }

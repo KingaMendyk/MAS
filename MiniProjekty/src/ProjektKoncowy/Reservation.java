@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Reservation implements Serializable {
     private int id;
-    private List<Integer> allIds = new ArrayList<>();
+    private static List<Integer> allIds = new ArrayList<>();
     private LocalDate dateFrom;
     private LocalDate dateTo;
     private ReservationState state;
@@ -72,16 +72,8 @@ public class Reservation implements Serializable {
         return dateFrom;
     }
 
-    public void setDateFrom(LocalDate dateFrom) {
-        this.dateFrom = dateFrom;
-    }
-
     public LocalDate getDateTo() {
         return dateTo;
-    }
-
-    public void setDateTo(LocalDate dateTo) {
-        this.dateTo = dateTo;
     }
 
     public Animal getAnimal() {
@@ -89,12 +81,14 @@ public class Reservation implements Serializable {
     }
 
     public void setAnimal(Animal animal) {
+        this.animal = animal;
         animalInRoom = new AnimalInRoom(animal, room);
         animal.addAnimalInRoom(animalInRoom);
         room.addAnimalInRoom(animalInRoom);
     }
 
     public void removeAnimal(Animal animal){
+        this.animal = null;
         animal.removeAnimalInRoom(animalInRoom);
         room.removeAnimalInRoom(animalInRoom);
     }
@@ -124,5 +118,14 @@ public class Reservation implements Serializable {
         removeRoom(room);
         removeAnimal(animal);
         changeState(ReservationState.Cancelled);
+    }
+
+    @Override
+    public String toString() {
+        return "Rezerwacja " + id + " od: " + dateFrom + " do: " + dateTo
+                + " hotel: " + getRoom().getHotel().getName()
+                + " pokój: " + room.getRoomNumber()
+                + " zwierzę: " + animal.getName()
+                + " status: " + state;
     }
 }
