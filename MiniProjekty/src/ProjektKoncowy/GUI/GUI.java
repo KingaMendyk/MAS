@@ -79,13 +79,6 @@ public class GUI {
     private JPanel calendarPanel;
     private JLabel typeLabel;
     private JComboBox typeComboBox;
-    private JLabel titleLabel;
-    private JLabel reservationTitleLabel;
-    private JLabel animalFormTitleLabel;
-    private JLabel roomTitleLabel;
-    private JLabel dateTitleLabel;
-    private JLabel hotelTitleLabel;
-    private JLabel animalTitleLabel;
     private JButton backButton;
 
     //Obsługa klas
@@ -105,6 +98,32 @@ public class GUI {
         ImageIcon calendarPicture = new ImageIcon("images/june-2024-calendar-landscape-classic.jpg");
         calendarPanel.setLayout(new GridLayout(1, 1));
         calendarPanel.add(new JLabel(new ImageIcon(calendarPicture.getImage().getScaledInstance(400, 350,Image.SCALE_SMOOTH))));
+
+        ImageIcon sidePicture = new ImageIcon("images/barkley1.jpg");
+        imagePanel.setLayout(new GridLayout(1, 1));
+        imagePanel.add(new JLabel(new ImageIcon(sidePicture.getImage().getScaledInstance(350, 500,Image.SCALE_SMOOTH))));
+
+        ImageIcon bannerImage = new ImageIcon("images/banner.png");
+        bannerPanel.setLayout(new GridLayout(1, 1));
+        bannerPanel.add(new JLabel(new ImageIcon(bannerImage.getImage().getScaledInstance(980, 240,Image.SCALE_SMOOTH))));
+
+        animalBannerPanel.setLayout(new GridLayout(1, 1));
+        animalBannerPanel.add(new JLabel(new ImageIcon(bannerImage.getImage().getScaledInstance(980, 240,Image.SCALE_SMOOTH))));
+
+        hotelUpperPanel.setLayout(new GridLayout(1, 1));
+        hotelUpperPanel.add(new JLabel(new ImageIcon(bannerImage.getImage().getScaledInstance(980, 240,Image.SCALE_SMOOTH))));
+
+        dateUpperPanel.setLayout(new GridLayout(1, 1));
+        dateUpperPanel.add(new JLabel(new ImageIcon(bannerImage.getImage().getScaledInstance(980, 240,Image.SCALE_SMOOTH))));
+
+        roomUpperPanel.setLayout(new GridLayout(1, 1));
+        roomUpperPanel.add(new JLabel(new ImageIcon(bannerImage.getImage().getScaledInstance(980, 240,Image.SCALE_SMOOTH))));
+
+        animalFormUpperPanel.setLayout(new GridLayout(1, 1));
+        animalFormUpperPanel.add(new JLabel(new ImageIcon(bannerImage.getImage().getScaledInstance(980, 240,Image.SCALE_SMOOTH))));
+
+        reservationUpperPanel.setLayout(new GridLayout(1, 1));
+        reservationUpperPanel.add(new JLabel(new ImageIcon(bannerImage.getImage().getScaledInstance(980, 240,Image.SCALE_SMOOTH))));
 
 
         //Modele list
